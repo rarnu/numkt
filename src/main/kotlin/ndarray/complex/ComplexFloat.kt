@@ -431,6 +431,14 @@ class ComplexFloat private constructor(private val number: Long) : Complex {
         else -> re == other.re && im == other.im
     }
 
+    override fun equals(other: Any?): Boolean= when {
+        this === other -> true
+        other is ComplexFloat -> re == other.re && im == other.im
+        else -> false
+    }
+
+    override fun hashCode(): Int = 31 * re.toBits() + im.toBits()
+
     internal fun hash(): Int = 31 * number.hashCode()
 
     /**

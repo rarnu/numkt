@@ -472,6 +472,14 @@ class ComplexDouble32 internal constructor(private val number: Long) : ComplexDo
 
     internal constructor(re: Double, im: Double) : this(Complex.convertComplexFloatToLong(re.toFloat(), im.toFloat()))
 
+    override fun equals(other: Any?): Boolean = when {
+        this === other -> true
+        other is ComplexDouble -> re == other.re && im == other.im
+        else -> false
+    }
+
+    override fun hashCode(): Int = 31 * re.toBits().hashCode() + im.toBits().hashCode()
+
     internal fun eq(other: ComplexDouble32): Boolean = when {
         number == other.number -> true
         else -> re == other.re && im == other.im

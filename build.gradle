@@ -23,8 +23,8 @@ repositories {
 }
 
 dependencies {
-
-    testImplementation 'junit:junit:4.13.2'
+    implementation("org.apache.commons:commons-csv:$common_csv_version")
+    testImplementation("junit:junit:4.13.2")
 }
 
 sourceCompatibility = 1.8
