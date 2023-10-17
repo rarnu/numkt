@@ -12,7 +12,7 @@ import org.junit.Test
 import kotlin.math.round
 import kotlin.random.Random
 
-class CreateNDArrayTests {
+class TestCreateNDArray {
 
     private val random = Random(42)
 

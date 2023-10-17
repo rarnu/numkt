@@ -1,4 +1,4 @@
-package numkt.sample
+package sample
 
 import com.rarnu.numkt.api.*
 import com.rarnu.numkt.ndarray.data.D2
@@ -9,7 +9,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 
 
-class NDArrayTest {
+class TestNDArray {
     @Test
     fun zerosD1() {
         val ndarray = Numkt.zeros<Int>(5)

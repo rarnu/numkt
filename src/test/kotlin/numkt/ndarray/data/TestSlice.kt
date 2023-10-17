@@ -11,7 +11,7 @@ import org.junit.Assert.*
 import org.junit.Test
 
 
-class SliceTest {
+class TestSlice {
 
     @Test
     fun testSlice1D() {

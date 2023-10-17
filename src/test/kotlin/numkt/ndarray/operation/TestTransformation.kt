@@ -9,7 +9,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 import kotlin.random.Random
 
-class TransformationTest {
+class TestTransformation {
 
     @Test
     fun clip1DIntDataType() {

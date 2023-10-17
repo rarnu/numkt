@@ -5,7 +5,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 
 
-class CreateComplexTest {
+class TestCreateComplex {
 
     @Test
     fun testEasyComplexCreation() {

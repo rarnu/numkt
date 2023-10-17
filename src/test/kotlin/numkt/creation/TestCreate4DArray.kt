@@ -13,7 +13,7 @@ import org.junit.Test
 import kotlin.math.round
 
 
-class Create4DArrayTests {
+class TestCreate4DArray {
 
     /*___________________________Byte_______________________________________*/
 

@@ -11,7 +11,7 @@ import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertFalse
 import org.junit.Test
 
-class ConcatenateTest {
+class TestConcatenate {
     @Test
     fun concatenateShouldConcatenateForSimpleArray() {
 

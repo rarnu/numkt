@@ -6,7 +6,7 @@ import com.rarnu.numkt.ndarray.operations.*
 import org.junit.Assert.*
 import org.junit.Test
 
-class IterableNDArrayTest {
+class TestIterableNDArray {
 
     @Test
     fun testOfFunctionAssociate() {

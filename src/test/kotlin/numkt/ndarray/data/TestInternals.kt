@@ -9,7 +9,7 @@ import org.junit.Assert.fail
 import org.junit.Test
 
 
-class InternalsTest {
+class TestInternals {
 
     @Test
     fun requireEqualShapeThrowsExceptionForUnequalShape() {

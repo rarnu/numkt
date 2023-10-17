@@ -13,7 +13,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 import kotlin.math.round
 
-class Create2DArrayTests {
+class TestCreate2DArray {
 
     /*___________________________Byte_______________________________________*/
 

@@ -6,7 +6,7 @@ import org.junit.Assert.*
 import org.junit.Test
 
 
-class MultiIndexProgressionTest {
+class TestMultiIndexProgression {
 
     @Test
     fun testOfIterating() {
