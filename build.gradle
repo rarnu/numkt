@@ -24,7 +24,7 @@ repositories {
 
 dependencies {
     implementation("org.apache.commons:commons-csv:$common_csv_version")
-    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlin_version")
 }
 
 sourceCompatibility = 1.8
