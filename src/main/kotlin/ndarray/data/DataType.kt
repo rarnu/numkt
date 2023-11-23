@@ -27,14 +27,11 @@ import kotlin.reflect.KClass
  */
 enum class DataType(val nativeCode: Int, val itemSize: Int, val clazz: KClass<out Any>) {
 
-    ByteDataType(1, 1, Byte::class),
-    ShortDataType(2, 2, Short::class),
-    IntDataType(3, 4, Int::class),
-    LongDataType(4, 8, Long::class),
-    FloatDataType(5, 4, Float::class),
-    DoubleDataType(6, 8, Double::class),
-    ComplexFloatDataType(7, 8, ComplexFloat::class),
-    ComplexDoubleDataType(8, 16, ComplexDouble::class);
+    ByteDataType(1, 1, Byte::class), ShortDataType(2, 2, Short::class), IntDataType(3, 4, Int::class), LongDataType(4, 8, Long::class), FloatDataType(5, 4, Float::class), DoubleDataType(6, 8, Double::class), ComplexFloatDataType(7, 8, ComplexFloat::class), ComplexDoubleDataType(
+        8,
+        16,
+        ComplexDouble::class
+    );
 
     fun isNumber(): Boolean = when (nativeCode) {
         1, 2, 3, 4, 5, 6 -> true

@@ -23,6 +23,7 @@ internal object KEStatistics : Statistics {
                     (sorted.data[mid - 1].toDouble() + sorted.data[mid].toDouble()) / 2
                 }
             }
+
             else -> null
         }
     }

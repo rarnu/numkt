@@ -12,8 +12,7 @@ import com.rarnu.numkt.ndarray.operations.plusAssign
 
 internal object KEMath : Math {
 
-    override val mathEx: MathEx
-        get() = KEMathEx
+    override val mathEx: MathEx get() = KEMathEx
 
     override fun <T : Number, D : Dimension> argMax(a: MultiArray<T, D>): Int {
         var arg = 0
@@ -117,7 +116,9 @@ internal object KEMath : Math {
 
     override fun <T : Number, D : Dimension> max(a: MultiArray<T, D>): T {
         var max = a.first()
-        for (el in a) if (max < el) max = el
+        for (el in a) {
+            if (max < el) max = el
+        }
         return max
     }
 
@@ -138,9 +139,7 @@ internal object KEMath : Math {
             val t = a.slice<T, D, O>(indexMap)
             var count = 0
             for (el in t) {
-                if (maxData[count] < el) {
-                    maxData[count] = el
-                }
+                if (maxData[count] < el) maxData[count] = el
                 count++
             }
         }
@@ -157,7 +156,9 @@ internal object KEMath : Math {
 
     override fun <T : Number, D : Dimension> min(a: MultiArray<T, D>): T {
         var min = a.first()
-        for (el in a) if (min > el) min = el
+        for (el in a) {
+            if (min > el) min = el
+        }
         return min
     }
 
@@ -178,9 +179,7 @@ internal object KEMath : Math {
             val t = a.slice<T, D, O>(indexMap)
             var count = 0
             for (el in t) {
-                if (minData[count] > el) {
-                    minData[count] = el
-                }
+                if (minData[count] > el) minData[count] = el
                 count++
             }
         }
@@ -223,11 +222,7 @@ internal object KEMath : Math {
     override fun <T : Number> sumDN(a: MultiArray<T, DN>, axis: Int): NDArray<T, DN> = sum(a, axis)
 
     override fun <T : Number, D : Dimension> cumSum(a: MultiArray<T, D>): D1Array<T> {
-        val ret = D1Array<Double>(
-            initMemoryView(a.size, DataType.DoubleDataType),
-            shape = intArrayOf(a.size),
-            dim = D1
-        )
+        val ret = D1Array<Double>(initMemoryView(a.size, DataType.DoubleDataType), shape = intArrayOf(a.size), dim = D1)
         var ind = 0
         var accum = 0.0
         var compens = 0.0 // compensation
@@ -238,7 +233,7 @@ internal object KEMath : Math {
             accum = t
             ret[ind++] = accum
         }
-        return ret.asType(a.dtype) // TODO(unchecked cast)
+        return ret.asType(a.dtype)
     }
 
     override fun <T : Number, D : Dimension> cumSum(a: MultiArray<T, D>, axis: Int): NDArray<T, D> {
@@ -278,6 +273,7 @@ private fun <T : Number, D : Dimension> summation(a: MultiArray<T, D>): T = when
         }
         accum
     }
+
     DataType.DoubleDataType -> {
         var accum = 0.0
         var compens = 0.0 // compensation
@@ -290,6 +286,7 @@ private fun <T : Number, D : Dimension> summation(a: MultiArray<T, D>): T = when
         }
         accum
     }
+
     DataType.IntDataType -> {
         var accum = 0
         val iter = if (a.consistent) a.data.getIntArray().iterator() else (a as MultiArray<Int, *>).iterator()
@@ -298,6 +295,7 @@ private fun <T : Number, D : Dimension> summation(a: MultiArray<T, D>): T = when
         }
         accum
     }
+
     DataType.LongDataType -> {
         var accum = 0L
         val iter = if (a.consistent) a.data.getLongArray().iterator() else (a as MultiArray<Long, *>).iterator()
@@ -306,6 +304,7 @@ private fun <T : Number, D : Dimension> summation(a: MultiArray<T, D>): T = when
         }
         accum
     }
+
     DataType.ShortDataType -> {
         var accum = 0
         val iter = if (a.consistent) a.data.getShortArray().iterator() else (a as MultiArray<Short, *>).iterator()
@@ -314,6 +313,7 @@ private fun <T : Number, D : Dimension> summation(a: MultiArray<T, D>): T = when
         }
         accum
     }
+
     DataType.ByteDataType -> {
         var accum = 0
         val iter = if (a.consistent) a.data.getByteArray().iterator() else (a as MultiArray<Byte, *>).iterator()
@@ -322,5 +322,6 @@ private fun <T : Number, D : Dimension> summation(a: MultiArray<T, D>): T = when
         }
         accum
     }
+
     else -> TODO("Complex numbers")
 } as T

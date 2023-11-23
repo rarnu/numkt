@@ -17,8 +17,8 @@ import kotlin.math.sqrt
 
 
 fun qrDouble(mat: MultiArray<Double, D2>): Pair<D2Array<Double>, D2Array<Double>> {
-    var q = Numkt.identity<Double>(mat.shape[0]) // TODO shape q = m x n
-    val r = mat.deepCopy() as D2Array<Double> // TODO shape r = min(m, n) x n
+    var q = Numkt.identity<Double>(mat.shape[0])
+    val r = mat.deepCopy() as D2Array<Double>
     for (i in 0 until min(mat.shape[0], mat.shape[1])) {
         val (tau, v) = householderTransformDouble(r[i until r.shape[0], i until r.shape[1]] as D2Array<Double>)
         val appliedR = applyHouseholderDouble(r[i until r.shape[0], i until r.shape[1]] as D2Array<Double>, tau, v)
@@ -158,9 +158,8 @@ internal fun householderTransformDouble(x: D2Array<Double>): Pair<Double, D1Arra
 
     val v = Numkt.zeros<Double>(x.shape[0])
     v[0] = 1.0
-    if (xnorm == 0.0) {
-        return Pair(0.0, v)
-    }
+    if (xnorm == 0.0) return Pair(0.0, v)
+
     val beta = -(if (alpha >= 0) 1 else -1) * hypot(alpha, xnorm)
     val tau = (beta - alpha) / beta
     val alphaMinusBeta = alpha - beta
@@ -181,9 +180,7 @@ internal fun householderTransformFloat(x: D2Array<Float>): Pair<Float, D1Array<F
 
     val v = Numkt.zeros<Float>(x.shape[0])
     v[0] = 1f
-    if (xnorm == 0f) {
-        return Pair(0f, v)
-    }
+    if (xnorm == 0f) return Pair(0f, v)
     val beta = -(if (alpha >= 0) 1 else -1) * hypot(alpha, xnorm)
     val tau = (beta - alpha) / beta
     val alphaMinusBeta = alpha - beta
@@ -204,9 +201,7 @@ internal fun householderTransformComplexFloat(x: MultiArray<ComplexFloat, D2>): 
 
     val v = Numkt.zeros<ComplexFloat>(x.shape[0])
     v[0] = ComplexFloat.one
-    if (xnorm == 0f) {
-        return Pair(ComplexFloat.zero, v)
-    }
+    if (xnorm == 0f) return Pair(ComplexFloat.zero, v)
     val beta = -(if (alpha.re >= 0) 1 else -1) * sqrt(alpha.re * alpha.re + alpha.im * alpha.im + xnorm * xnorm)
     val tau = (beta.toComplexFloat() - alpha) / beta.toComplexFloat()
     val coeff = ComplexFloat.one / (alpha - beta)
@@ -227,9 +222,7 @@ internal fun householderTransformComplexDouble(x: MultiArray<ComplexDouble, D2>)
 
     val v = Numkt.zeros<ComplexDouble>(x.shape[0])
     v[0] = ComplexDouble.one
-    if (xnorm == 0.0) {
-        return Pair(ComplexDouble.zero, v)
-    }
+    if (xnorm == 0.0) return Pair(ComplexDouble.zero, v)
     val beta = -(if (alpha.re >= 0) 1 else -1) * sqrt(alpha.re * alpha.re + alpha.im * alpha.im + xnorm * xnorm)
     val tau = (beta.toComplexDouble() - alpha) / beta.toComplexDouble()
     val coeff = ComplexDouble.one / (alpha - beta)
@@ -271,9 +264,7 @@ internal fun applyHouseholderFloat(x: D2Array<Float>, tau: Float, v: D1Array<Flo
     return applied
 }
 
-internal fun applyHouseholderComplexFloat(
-    x: MultiArray<ComplexFloat, D2>, tau: ComplexFloat, v: MultiArray<ComplexFloat, D1>
-): D2Array<ComplexFloat> {
+internal fun applyHouseholderComplexFloat(x: MultiArray<ComplexFloat, D2>, tau: ComplexFloat, v: MultiArray<ComplexFloat, D1>): D2Array<ComplexFloat> {
     //x - tau * np.sum(v * x) * v
     val applied = x.deepCopy() as D2Array<ComplexFloat>
 
@@ -291,9 +282,7 @@ internal fun applyHouseholderComplexFloat(
 
 // returns (Id - tau * v * v.H) * x
 // v.H is Hermitian conjugation
-internal fun applyHouseholderComplexDouble(
-    x: MultiArray<ComplexDouble, D2>, tau: ComplexDouble, v: MultiArray<ComplexDouble, D1>
-): D2Array<ComplexDouble> {
+internal fun applyHouseholderComplexDouble(x: MultiArray<ComplexDouble, D2>, tau: ComplexDouble, v: MultiArray<ComplexDouble, D1>): D2Array<ComplexDouble> {
     //x - tau * np.sum(v * x) * v
     val applied = x.deepCopy() as D2Array<ComplexDouble>
 

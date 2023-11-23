@@ -1,6 +1,7 @@
 package com.rarnu.numkt.ndarray.complex
 
 private class ArrayComplexFloatIterator(private val array: ComplexFloatArray) : ComplexFloatIterator() {
+
     private var index = 0
 
     override fun hasNext(): Boolean = index < array.size
@@ -13,6 +14,7 @@ private class ArrayComplexFloatIterator(private val array: ComplexFloatArray) : 
 }
 
 private class ArrayComplexDoubleIterator(private val array: ComplexDoubleArray) : ComplexDoubleIterator() {
+
     private var index = 0
 
     override fun hasNext(): Boolean = index < array.size

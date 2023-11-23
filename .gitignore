@@ -5,6 +5,8 @@
 gradle/
 .gradle/
 build/
+build_*/
+cmake-build-*/
 
 # Compiled class file
 *.class

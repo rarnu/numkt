@@ -66,17 +66,17 @@ private fun dotMatrix(left: ShortArray, leftOffset: Int, leftStrides: IntArray, 
 }
 
 private fun dotMatrix(left: IntArray, leftOffset: Int, leftStrides: IntArray, right: IntArray, rightOffset: Int, rightStrides: IntArray, n: Int, m: Int, t: Int, destination: IntArray, dStrides: Int): IntArray {
-    val (leftStride_0, leftStride_1) = leftStrides
-    val (rightStride_0, rightStride_1) = rightStrides
+    val (leftStride0, leftStride1) = leftStrides
+    val (rightStride0, rightStride1) = rightStrides
 
     for (i in 0 until n) {
         val dInd = i * dStrides
-        val lInd = i * leftStride_0 + leftOffset
+        val lInd = i * leftStride0 + leftOffset
         for (k in 0 until t) {
-            val ceil = left[lInd + k * leftStride_1]
-            val rInd = k * rightStride_0 + rightOffset
+            val ceil = left[lInd + k * leftStride1]
+            val rInd = k * rightStride0 + rightOffset
             for (j in 0 until m) {
-                destination[dInd + j] += ceil * right[rInd + j * rightStride_1]
+                destination[dInd + j] += ceil * right[rInd + j * rightStride1]
             }
         }
     }
@@ -84,17 +84,17 @@ private fun dotMatrix(left: IntArray, leftOffset: Int, leftStrides: IntArray, ri
 }
 
 private fun dotMatrix(left: LongArray, leftOffset: Int, leftStrides: IntArray, right: LongArray, rightOffset: Int, rightStrides: IntArray, n: Int, m: Int, t: Int, destination: LongArray, dStrides: Int): LongArray {
-    val (leftStride_0, leftStride_1) = leftStrides
-    val (rightStride_0, rightStride_1) = rightStrides
+    val (leftStride0, leftStride1) = leftStrides
+    val (rightStride0, rightStride1) = rightStrides
 
     for (i in 0 until n) {
         val dInd = i * dStrides
-        val lInd = i * leftStride_0 + leftOffset
+        val lInd = i * leftStride0 + leftOffset
         for (k in 0 until t) {
-            val ceil = left[lInd + k * leftStride_1]
-            val rInd = k * rightStride_0 + rightOffset
+            val ceil = left[lInd + k * leftStride1]
+            val rInd = k * rightStride0 + rightOffset
             for (j in 0 until m) {
-                destination[dInd + j] += ceil * right[rInd + j * rightStride_1]
+                destination[dInd + j] += ceil * right[rInd + j * rightStride1]
             }
         }
     }
@@ -102,17 +102,17 @@ private fun dotMatrix(left: LongArray, leftOffset: Int, leftStrides: IntArray, r
 }
 
 private fun dotMatrix(left: FloatArray, leftOffset: Int, leftStrides: IntArray, right: FloatArray, rightOffset: Int, rightStrides: IntArray, n: Int, m: Int, t: Int, destination: FloatArray, dStrides: Int): FloatArray {
-    val (leftStride_0, leftStride_1) = leftStrides
-    val (rightStride_0, rightStride_1) = rightStrides
+    val (leftStride0, leftStride1) = leftStrides
+    val (rightStride0, rightStride1) = rightStrides
 
     for (i in 0 until n) {
         val dInd = i * dStrides
-        val lInd = i * leftStride_0 + leftOffset
+        val lInd = i * leftStride0 + leftOffset
         for (k in 0 until t) {
-            val ceil = left[lInd + k * leftStride_1]
-            val rInd = k * rightStride_0 + rightOffset
+            val ceil = left[lInd + k * leftStride1]
+            val rInd = k * rightStride0 + rightOffset
             for (j in 0 until m) {
-                destination[dInd + j] += ceil * right[rInd + j * rightStride_1]
+                destination[dInd + j] += ceil * right[rInd + j * rightStride1]
             }
         }
     }
@@ -120,17 +120,17 @@ private fun dotMatrix(left: FloatArray, leftOffset: Int, leftStrides: IntArray, 
 }
 
 private fun dotMatrix(left: DoubleArray, leftOffset: Int, leftStrides: IntArray, right: DoubleArray, rightOffset: Int, rightStrides: IntArray, n: Int, m: Int, t: Int, destination: DoubleArray, dStrides: Int): DoubleArray {
-    val (leftStride_0, leftStride_1) = leftStrides
-    val (rightStride_0, rightStride_1) = rightStrides
+    val (leftStride0, leftStride1) = leftStrides
+    val (rightStride0, rightStride1) = rightStrides
 
     for (i in 0 until n) {
         val dInd = i * dStrides
-        val lInd = i * leftStride_0 + leftOffset
+        val lInd = i * leftStride0 + leftOffset
         for (k in 0 until t) {
-            val ceil = left[lInd + k * leftStride_1]
-            val rInd = k * rightStride_0 + rightOffset
+            val ceil = left[lInd + k * leftStride1]
+            val rInd = k * rightStride0 + rightOffset
             for (j in 0 until m) {
-                destination[dInd + j] += ceil * right[rInd + j * rightStride_1]
+                destination[dInd + j] += ceil * right[rInd + j * rightStride1]
             }
         }
     }
@@ -138,17 +138,17 @@ private fun dotMatrix(left: DoubleArray, leftOffset: Int, leftStrides: IntArray,
 }
 
 private fun dotMatrixComplex(left: ComplexDoubleArray, leftOffset: Int, leftStrides: IntArray, right: ComplexDoubleArray, rightOffset: Int, rightStrides: IntArray, n: Int, m: Int, t: Int, destination: ComplexDoubleArray, dStrides: Int): ComplexDoubleArray {
-    val (leftStride_0, leftStride_1) = leftStrides
-    val (rightStride_0, rightStride_1) = rightStrides
+    val (leftStride0, leftStride1) = leftStrides
+    val (rightStride0, rightStride1) = rightStrides
 
     for (i in 0 until n) {
         val dInd = i * dStrides
-        val lInd = i * leftStride_0 + leftOffset
+        val lInd = i * leftStride0 + leftOffset
         for (k in 0 until t) {
-            val ceil = left[lInd + k * leftStride_1]
-            val rInd = k * rightStride_0 + rightOffset
+            val ceil = left[lInd + k * leftStride1]
+            val rInd = k * rightStride0 + rightOffset
             for (j in 0 until m) {
-                destination[dInd + j] += ceil * right[rInd + j * rightStride_1]
+                destination[dInd + j] += ceil * right[rInd + j * rightStride1]
             }
         }
     }
@@ -156,17 +156,17 @@ private fun dotMatrixComplex(left: ComplexDoubleArray, leftOffset: Int, leftStri
 }
 
 private fun dotMatrixComplex(left: ComplexFloatArray, leftOffset: Int, leftStrides: IntArray, right: ComplexFloatArray, rightOffset: Int, rightStrides: IntArray, n: Int, m: Int, t: Int, destination: ComplexFloatArray, dStrides: Int): ComplexFloatArray {
-    val (leftStride_0, leftStride_1) = leftStrides
-    val (rightStride_0, rightStride_1) = rightStrides
+    val (leftStride0, leftStride1) = leftStrides
+    val (rightStride0, rightStride1) = rightStrides
 
     for (i in 0 until n) {
         val dInd = i * dStrides
-        val lInd = i * leftStride_0 + leftOffset
+        val lInd = i * leftStride0 + leftOffset
         for (k in 0 until t) {
-            val ceil = left[lInd + k * leftStride_1]
-            val rInd = k * rightStride_0 + rightOffset
+            val ceil = left[lInd + k * leftStride1]
+            val rInd = k * rightStride0 + rightOffset
             for (j in 0 until m) {
-                destination[dInd + j] += ceil * right[rInd + j * rightStride_1]
+                destination[dInd + j] += ceil * right[rInd + j * rightStride1]
             }
         }
     }
@@ -198,88 +198,88 @@ private fun <T> dotMatrixToVectorCommon(a: MultiArray<T, D2>, b: MultiArray<T, D
 }
 
 private fun dotVector(left: FloatArray, leftOffset: Int, leftStrides: IntArray, right: FloatArray, rightOffset: Int, rStride: Int, n: Int, m: Int, destination: FloatArray): FloatArray {
-    val (lStride_0, lStride_1) = leftStrides
+    val (lStride0, lStride1) = leftStrides
     for (i in 0 until n) {
-        val lInd = i * lStride_0 + leftOffset
+        val lInd = i * lStride0 + leftOffset
         for (j in 0 until m) {
-            destination[i] += left[lInd + j * lStride_1] * right[j * rStride + rightOffset]
+            destination[i] += left[lInd + j * lStride1] * right[j * rStride + rightOffset]
         }
     }
     return destination
 }
 
 private fun dotVector(left: IntArray, leftOffset: Int, leftStrides: IntArray, right: IntArray, rightOffset: Int, rStride: Int, n: Int, m: Int, destination: IntArray): IntArray {
-    val (lStride_0, lStride_1) = leftStrides
+    val (lStride0, lStride1) = leftStrides
     for (i in 0 until n) {
-        val lInd = i * lStride_0 + leftOffset
+        val lInd = i * lStride0 + leftOffset
         for (j in 0 until m) {
-            destination[i] += left[lInd + j * lStride_1] * right[j * rStride + rightOffset]
+            destination[i] += left[lInd + j * lStride1] * right[j * rStride + rightOffset]
         }
     }
     return destination
 }
 
 private fun dotVector(left: DoubleArray, leftOffset: Int, leftStrides: IntArray, right: DoubleArray, rightOffset: Int, rStride: Int, n: Int, m: Int, destination: DoubleArray): DoubleArray {
-    val (lStride_0, lStride_1) = leftStrides
+    val (lStride0, lStride1) = leftStrides
     for (i in 0 until n) {
-        val lInd = i * lStride_0 + leftOffset
+        val lInd = i * lStride0 + leftOffset
         for (j in 0 until m) {
-            destination[i] += left[lInd + j * lStride_1] * right[j * rStride + rightOffset]
+            destination[i] += left[lInd + j * lStride1] * right[j * rStride + rightOffset]
         }
     }
     return destination
 }
 
 private fun dotVector(left: LongArray, leftOffset: Int, leftStrides: IntArray, right: LongArray, rightOffset: Int, rStride: Int, n: Int, m: Int, destination: LongArray): LongArray {
-    val (lStride_0, lStride_1) = leftStrides
+    val (lStride0, lStride1) = leftStrides
     for (i in 0 until n) {
-        val lInd = i * lStride_0 + leftOffset
+        val lInd = i * lStride0 + leftOffset
         for (j in 0 until m) {
-            destination[i] += left[lInd + j * lStride_1] * right[j * rStride + rightOffset]
+            destination[i] += left[lInd + j * lStride1] * right[j * rStride + rightOffset]
         }
     }
     return destination
 }
 
 private fun dotVector(left: ShortArray, leftOffset: Int, leftStrides: IntArray, right: ShortArray, rightOffset: Int, rStride: Int, n: Int, m: Int, destination: ShortArray): ShortArray {
-    val (lStride_0, lStride_1) = leftStrides
+    val (lStride0, lStride1) = leftStrides
     for (i in 0 until n) {
-        val lInd = i * lStride_0 + leftOffset
+        val lInd = i * lStride0 + leftOffset
         for (j in 0 until m) {
-            destination[i] = (destination[i] + left[lInd + j * lStride_1] * right[j * rStride + rightOffset]).toShort()
+            destination[i] = (destination[i] + left[lInd + j * lStride1] * right[j * rStride + rightOffset]).toShort()
         }
     }
     return destination
 }
 
 private fun dotVector(left: ByteArray, leftOffset: Int, leftStrides: IntArray, right: ByteArray, rightOffset: Int, rStride: Int, n: Int, m: Int, destination: ByteArray): ByteArray {
-    val (lStride_0, lStride_1) = leftStrides
+    val (lStride0, lStride1) = leftStrides
     for (i in 0 until n) {
-        val lInd = i * lStride_0 + leftOffset
+        val lInd = i * lStride0 + leftOffset
         for (j in 0 until m) {
-            destination[i] = (destination[i] + left[lInd + j * lStride_1] * right[j * rStride + rightOffset]).toByte()
+            destination[i] = (destination[i] + left[lInd + j * lStride1] * right[j * rStride + rightOffset]).toByte()
         }
     }
     return destination
 }
 
 private fun dotVectorComplex(left: ComplexDoubleArray, leftOffset: Int, leftStrides: IntArray, right: ComplexDoubleArray, rightOffset: Int, rStride: Int, n: Int, m: Int, destination: ComplexDoubleArray): ComplexDoubleArray {
-    val (lStride_0, lStride_1) = leftStrides
+    val (lStride0, lStride1) = leftStrides
     for (i in 0 until n) {
-        val lInd = i * lStride_0 + leftOffset
+        val lInd = i * lStride0 + leftOffset
         for (j in 0 until m) {
-            destination[i] += left[lInd + j * lStride_1] * right[j * rStride + rightOffset]
+            destination[i] += left[lInd + j * lStride1] * right[j * rStride + rightOffset]
         }
     }
     return destination
 }
 
 private fun dotVectorComplex(left: ComplexFloatArray, leftOffset: Int, leftStrides: IntArray, right: ComplexFloatArray, rightOffset: Int, rStride: Int, n: Int, m: Int, destination: ComplexFloatArray): ComplexFloatArray {
-    val (lStride_0, lStride_1) = leftStrides
+    val (lStride0, lStride1) = leftStrides
     for (i in 0 until n) {
-        val lInd = i * lStride_0 + leftOffset
+        val lInd = i * lStride0 + leftOffset
         for (j in 0 until m) {
-            destination[i] += left[lInd + j * lStride_1] * right[j * rStride + rightOffset]
+            destination[i] += left[lInd + j * lStride1] * right[j * rStride + rightOffset]
         }
     }
     return destination

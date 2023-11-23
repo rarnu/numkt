@@ -13,21 +13,14 @@ import com.rarnu.numkt.kotlin.stat.KEStatistics
 
 class KEEngine : Engine() {
 
-    override val name: String
-        get() = type.name
+    override val name: String get() = type.name
 
-    override val type: EngineType
-        get() = KEEngineType
+    override val type: EngineType get() = KEEngineType
 
-    override fun getMath(): Math {
-        return KEMath
-    }
+    override fun getMath(): Math = KEMath
 
-    override fun getLinAlg(): LinAlg {
-        return KELinAlg
-    }
+    override fun getLinAlg(): LinAlg = KELinAlg
 
-    override fun getStatistics(): Statistics {
-        return KEStatistics
-    }
+    override fun getStatistics(): Statistics = KEStatistics
+
 }

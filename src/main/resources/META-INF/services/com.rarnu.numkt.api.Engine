@@ -1,1 +1,3 @@
 com.rarnu.numkt.kotlin.KEEngine
+com.rarnu.numkt.native.JvmNativeEngine
+com.rarnu.numkt.default.DefaultEngine

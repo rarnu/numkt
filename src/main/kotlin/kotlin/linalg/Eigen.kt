@@ -32,15 +32,15 @@ internal fun <T, O : Any> eigenValuesCommon(a: MultiArray<T, D2>, dtype: DataTyp
  * computes eigenvalues of matrix a
  */
 internal fun eigenvaluesFloat(a: MultiArray<ComplexFloat, D2>): D1Array<ComplexFloat> {
-    val (_, H) = upperHessenbergFloat(a)
-    val (upperTriangular, _) = qrShiftedFloat(H)
+    val (_, h) = upperHessenbergFloat(a)
+    val (upperTriangular, _) = qrShiftedFloat(h)
 
     return Numkt.d1array(upperTriangular.shape[0]) { upperTriangular[it, it] }
 }
 
 internal fun eigenvaluesDouble(a: MultiArray<ComplexDouble, D2>): D1Array<ComplexDouble> {
-    val (_, H) = upperHessenbergDouble(a)
-    val (upperTriangular, _) = qrShiftedDouble(H)
+    val (_, h) = upperHessenbergDouble(a)
+    val (upperTriangular, _) = qrShiftedDouble(h)
 
     return Numkt.d1array(upperTriangular.shape[0]) { upperTriangular[it, it] }
 }
@@ -57,12 +57,12 @@ internal fun eigenvaluesDouble(a: MultiArray<ComplexDouble, D2>): D1Array<Comple
  * NOTE: inplace
  */
 internal fun schurDecomposition(a: MultiArray<ComplexDouble, D2>): Pair<D2Array<ComplexDouble>, D2Array<ComplexDouble>> {
-    val (L, H) = upperHessenbergDouble(a)
+    val (l, h) = upperHessenbergDouble(a)
     // a = L * H * L.H
     // H = L1 * UT * L1.H
     // a = (L * L1) * UT * (L1.H * L.H)
-    val (upperTriangular, L1) = qrShiftedDouble(H)
-    return Pair(dotMatrixComplex(L, L1), upperTriangular)
+    val (upperTriangular, l1) = qrShiftedDouble(h)
+    return Pair(dotMatrixComplex(l, l1), upperTriangular)
 }
 
 /**
@@ -94,34 +94,21 @@ private fun qrShiftedFloat(a: MultiArray<ComplexFloat, D2>, trialsNumber: Int = 
 
     val itmax = trialsNumber * max(10, n)
     var kdefl = 0
-
     var i = n - 1
-
     while (i >= 0) {
-
         var l = 0
-
         var failedToConverge = true
-
         for (iteration in 0 until itmax) { // Look for a single small subdiagonal element
-
             l = run {
                 for (k in i downTo l + 1) {
                     if (absL1(a[k, k - 1]) < smlnum) {
                         return@run k
                     }
-
                     var tst = absL1(a[k - 1, k - 1]) + absL1(a[k, k])
-
                     if (tst == 0f) {
-                        if (k >= 2) {
-                            tst += abs(a[k - 1, k - 2].re)
-                        }
-                        if (k + 2 <= n) {
-                            tst += abs(a[k + 1, k].re)
-                        }
+                        if (k >= 2) tst += abs(a[k - 1, k - 2].re)
+                        if (k + 2 <= n) tst += abs(a[k + 1, k].re)
                     }
-
                     if (abs(a[k, k - 1].re) <= ulp * tst) {
                         // The following is a conservative small subdiagonal
                         // deflation criterion due to Ahues & Tisseur (LAWN 122,
@@ -131,28 +118,18 @@ private fun qrShiftedFloat(a: MultiArray<ComplexFloat, D2>, trialsNumber: Int = 
                         val ba = min(absL1(a[k, k - 1]), absL1(a[k - 1, k]))
                         val aa = max(absL1(a[k, k]), absL1(a[k - 1, k - 1] - a[k, k]))
                         val bb = min(absL1(a[k, k]), absL1(a[k - 1, k - 1] - a[k, k]))
-
                         val s = aa + ab
-                        if (ba * (ab / s) <= max(smlnum, ulp * (bb * (aa / s)))) {
-                            return@run k
-                        }
+                        if (ba * (ab / s) <= max(smlnum, ulp * (bb * (aa / s)))) return@run k
                     }
                 }
-
                 return@run l
             }
-
-            if (l > 0) {
-                a[l, l - 1] = ComplexFloat.zero
-            }
-
+            if (l > 0) a[l, l - 1] = ComplexFloat.zero
             if (l >= i) {
                 failedToConverge = false
                 break
             }
-
             kdefl++
-
             val kExceptionalShift = 10
             val dat1 = 0.75f
             var s: Float
@@ -164,12 +141,10 @@ private fun qrShiftedFloat(a: MultiArray<ComplexFloat, D2>, trialsNumber: Int = 
                     s = dat1 * abs(a[i, i - 1].re)
                     t = a[i, i] + s
                 }
-
                 kdefl % kExceptionalShift == 0 -> {
                     s = dat1 * abs(a[l + 1, l].re)
                     t = a[l, l] + s
                 }
-
                 else -> {
                     t = a[i, i]
                     u = csqrt(a[i - 1, i]) * csqrt(a[i, i - 1])
@@ -179,9 +154,7 @@ private fun qrShiftedFloat(a: MultiArray<ComplexFloat, D2>, trialsNumber: Int = 
                         val sx = absL1(x)
                         s = max(s, absL1(x))
                         var y = csqrt((x / s) * (x / s) + (u / s) * (u / s)) * s
-                        if (sx > 0.0 && ((x.re / sx) * y.re + (x.im / sx) * y.im) < 0.0) {
-                            y = -y
-                        }
+                        if (sx > 0.0 && ((x.re / sx) * y.re + (x.im / sx) * y.im) < 0.0) y = -y
                         t -= u * (u / (x + y))
                     }
                 }
@@ -206,10 +179,7 @@ private fun qrShiftedFloat(a: MultiArray<ComplexFloat, D2>, trialsNumber: Int = 
                     v[1] = h21
                     if (m > l) {
                         val h10 = a[m, m - 1]
-
-                        if (h10.abs() * h21.abs() <= ulp * (absL1(h11s) * (absL1(h11) + absL1(h22)))) {
-                            return@run m
-                        }
+                        if (h10.abs() * h21.abs() <= ulp * (absL1(h11s) * (absL1(h11) + absL1(h22)))) return@run m
                     }
                 }
                 return@run l
@@ -221,15 +191,12 @@ private fun qrShiftedFloat(a: MultiArray<ComplexFloat, D2>, trialsNumber: Int = 
                     v[0] = a[k, k - 1]
                     v[1] = a[k + 1, k - 1]
                 }
-
                 val (v1, t1) = computeHouseholderReflectorInplace(2, v[0], v[1 until 2] as D1Array<ComplexFloat>)
                 v[0] = v1
-
                 if (k > m) {
                     a[k, k - 1] = v[0]
                     a[k + 1, k - 1] = ComplexFloat.zero
                 }
-
                 val v2 = v[1]
                 val t2 = (t1 * v2).re
 
@@ -255,14 +222,10 @@ private fun qrShiftedFloat(a: MultiArray<ComplexFloat, D2>, trialsNumber: Int = 
                     var temp = ComplexFloat.one - t1
                     temp /= temp.abs()
                     a[m + 1, m] = a[m + 1, m] * temp.conjugate()
-                    if (m + 2 < i) {
-                        a[m + 2, m + 1] *= temp
-                    }
+                    if (m + 2 < i) a[m + 2, m + 1] *= temp
                     for (j in m..i) {
                         if (j != m + 1) {
-                            if (n > j + 1) {
-                                (a[j, (j + 1) until n] as D1Array<ComplexFloat>) *= temp
-                            }
+                            if (n > j + 1) (a[j, (j + 1) until n] as D1Array<ComplexFloat>) *= temp
                             a[0 until j, j] as D1Array<ComplexFloat> *= temp.conjugate()
                             z[0 until n, j] as D1Array<ComplexFloat> *= temp.conjugate()
                         }
@@ -276,16 +239,12 @@ private fun qrShiftedFloat(a: MultiArray<ComplexFloat, D2>, trialsNumber: Int = 
                 val rtemp = temp.abs().toComplexFloat()
                 a[i, i - 1] = rtemp
                 temp /= rtemp
-                if (n > i + 1) {
-                    a[i, (i + 1) until n] as D1Array<ComplexFloat> *= temp.conjugate()
-                }
+                if (n > i + 1) a[i, (i + 1) until n] as D1Array<ComplexFloat> *= temp.conjugate()
                 a[0 until i, i] as D1Array<ComplexFloat> *= temp
                 z[0 until n, i] as D1Array<ComplexFloat> *= temp
             }
         }
-        if (failedToConverge) {
-            throw ArithmeticException("failed to converge with trialsNumber = $trialsNumber")
-        }
+        if (failedToConverge) throw ArithmeticException("failed to converge with trialsNumber = $trialsNumber")
         kdefl = 0
         i = l - 1
     }
@@ -293,9 +252,7 @@ private fun qrShiftedFloat(a: MultiArray<ComplexFloat, D2>, trialsNumber: Int = 
     return Pair(a, z)
 }
 
-private fun qrShiftedDouble(
-    a: MultiArray<ComplexDouble, D2>, trialsNumber: Int = 30
-): Pair<D2Array<ComplexDouble>, D2Array<ComplexDouble>> {
+private fun qrShiftedDouble(a: MultiArray<ComplexDouble, D2>, trialsNumber: Int = 30): Pair<D2Array<ComplexDouble>, D2Array<ComplexDouble>> {
     val (n, _) = a.shape
     val z = Numkt.identity<ComplexDouble>(a.shape[0])
     val v = Numkt.zeros<ComplexDouble>(2)
@@ -315,37 +272,21 @@ private fun qrShiftedDouble(
 
     val ulp = 1e-16
     val smlnum = (1e-300) * (n / ulp)
-
     val itmax = trialsNumber * max(10, n)
     var kdefl = 0
-
     var i = n - 1
-
     while (i >= 0) {
-
         var l = 0
-
         var failedToConverge = true
-
         for (iteration in 0 until itmax) { // Look for a single small subdiagonal element
-
             l = run {
                 for (k in i downTo l + 1) {
-                    if (absL1(a[k, k - 1]) < smlnum) {
-                        return@run k
-                    }
-
+                    if (absL1(a[k, k - 1]) < smlnum) return@run k
                     var tst = absL1(a[k - 1, k - 1]) + absL1(a[k, k])
-
                     if (tst == 0.0) {
-                        if (k >= 2) {
-                            tst += abs(a[k - 1, k - 2].re)
-                        }
-                        if (k + 2 <= n) {
-                            tst += abs(a[k + 1, k].re)
-                        }
+                        if (k >= 2) tst += abs(a[k - 1, k - 2].re)
+                        if (k + 2 <= n) tst += abs(a[k + 1, k].re)
                     }
-
                     if (abs(a[k, k - 1].re) <= ulp * tst) {
                         // The following is a conservative small subdiagonal
                         // deflation criterion due to Ahues & Tisseur (LAWN 122,
@@ -355,28 +296,18 @@ private fun qrShiftedDouble(
                         val ba = min(absL1(a[k, k - 1]), absL1(a[k - 1, k]))
                         val aa = max(absL1(a[k, k]), absL1(a[k - 1, k - 1] - a[k, k]))
                         val bb = min(absL1(a[k, k]), absL1(a[k - 1, k - 1] - a[k, k]))
-
                         val s = aa + ab
-                        if (ba * (ab / s) <= max(smlnum, ulp * (bb * (aa / s)))) {
-                            return@run k
-                        }
+                        if (ba * (ab / s) <= max(smlnum, ulp * (bb * (aa / s)))) return@run k
                     }
                 }
-
                 return@run l
             }
-
-            if (l > 0) {
-                a[l, l - 1] = ComplexDouble.zero
-            }
-
+            if (l > 0) a[l, l - 1] = ComplexDouble.zero
             if (l >= i) {
                 failedToConverge = false
                 break
             }
-
             kdefl++
-
             val kExceptionalShift = 10
             val dat1 = 0.75
             var s: Double
@@ -388,12 +319,10 @@ private fun qrShiftedDouble(
                     s = dat1 * abs(a[i, i - 1].re)
                     t = a[i, i] + s
                 }
-
                 kdefl % kExceptionalShift == 0 -> {
                     s = dat1 * abs(a[l + 1, l].re)
                     t = a[l, l] + s
                 }
-
                 else -> {
                     t = a[i, i]
                     u = csqrt(a[i - 1, i]) * csqrt(a[i, i - 1])
@@ -403,9 +332,7 @@ private fun qrShiftedDouble(
                         val sx = absL1(x)
                         s = max(s, absL1(x))
                         var y = csqrt((x / s) * (x / s) + (u / s) * (u / s)) * s
-                        if (sx > 0.0 && ((x.re / sx) * y.re + (x.im / sx) * y.im) < 0.0) {
-                            y = -y
-                        }
+                        if (sx > 0.0 && ((x.re / sx) * y.re + (x.im / sx) * y.im) < 0.0) y = -y
                         t -= u * (u / (x + y))
                     }
                 }
@@ -430,10 +357,7 @@ private fun qrShiftedDouble(
                     v[1] = h21
                     if (m > l) {
                         val h10 = a[m, m - 1]
-
-                        if (h10.abs() * h21.abs() <= ulp * (absL1(h11s) * (absL1(h11) + absL1(h22)))) {
-                            return@run m
-                        }
+                        if (h10.abs() * h21.abs() <= ulp * (absL1(h11s) * (absL1(h11) + absL1(h22)))) return@run m
                     }
                 }
                 return@run l
@@ -445,15 +369,12 @@ private fun qrShiftedDouble(
                     v[0] = a[k, k - 1]
                     v[1] = a[k + 1, k - 1]
                 }
-
                 val (v1, t1) = computeHouseholderReflectorInplace(2, v[0], v[1 until 2] as D1Array<ComplexDouble>)
                 v[0] = v1
-
                 if (k > m) {
                     a[k, k - 1] = v[0]
                     a[k + 1, k - 1] = ComplexDouble.zero
                 }
-
                 val v2 = v[1]
                 val t2 = (t1 * v2).re
 
@@ -479,14 +400,10 @@ private fun qrShiftedDouble(
                     var temp = ComplexFloat.one - t1
                     temp /= temp.abs()
                     a[m + 1, m] = a[m + 1, m] * temp.conjugate()
-                    if (m + 2 < i) {
-                        a[m + 2, m + 1] *= temp
-                    }
+                    if (m + 2 < i) a[m + 2, m + 1] *= temp
                     for (j in m..i) {
                         if (j != m + 1) {
-                            if (n > j + 1) {
-                                (a[j, (j + 1) until n] as D1Array<ComplexDouble>) *= temp
-                            }
+                            if (n > j + 1) (a[j, (j + 1) until n] as D1Array<ComplexDouble>) *= temp
                             a[0 until j, j] as D1Array<ComplexDouble> *= temp.conjugate()
                             z[0 until n, j] as D1Array<ComplexDouble> *= temp.conjugate()
                         }
@@ -500,16 +417,12 @@ private fun qrShiftedDouble(
                 val rtemp = temp.abs().toComplexDouble()
                 a[i, i - 1] = rtemp
                 temp /= rtemp
-                if (n > i + 1) {
-                    a[i, (i + 1) until n] as D1Array<ComplexDouble> *= temp.conjugate()
-                }
+                if (n > i + 1) a[i, (i + 1) until n] as D1Array<ComplexDouble> *= temp.conjugate()
                 a[0 until i, i] as D1Array<ComplexDouble> *= temp
                 z[0 until n, i] as D1Array<ComplexDouble> *= temp
             }
         }
-        if (failedToConverge) {
-            throw ArithmeticException("failed to converge with trialsNumber = $trialsNumber")
-        }
+        if (failedToConverge) throw ArithmeticException("failed to converge with trialsNumber = $trialsNumber")
         kdefl = 0
         i = l - 1
     }
@@ -518,13 +431,9 @@ private fun qrShiftedDouble(
 }
 
 // return (beta, tau), mute x
-private fun computeHouseholderReflectorInplace(
-    n: Int, alpha: ComplexFloat, x: D1Array<ComplexFloat>
-): Pair<ComplexFloat, ComplexFloat> {
+private fun computeHouseholderReflectorInplace(n: Int, alpha: ComplexFloat, x: D1Array<ComplexFloat>): Pair<ComplexFloat, ComplexFloat> {
     var tmp = alpha
-    if (n <= 0) {
-        return Pair(tmp, ComplexFloat.zero)
-    }
+    if (n <= 0) return Pair(tmp, ComplexFloat.zero)
     var xnorm = 0f
     for (i in 0 until n - 1) {
         xnorm += (x[i] * x[i].conjugate()).re
@@ -533,9 +442,7 @@ private fun computeHouseholderReflectorInplace(
     var alphr = alpha.re
     var alphi = alpha.im
 
-    if (xnorm == 0f && alphi == 0f) {
-        return Pair(tmp, ComplexFloat.zero)
-    }
+    if (xnorm == 0f && alphi == 0f) return Pair(tmp, ComplexFloat.zero)
 
     var beta = -signum(alphr) * sqrt(alphr * alphr + alphi * alphi + xnorm * xnorm)
     val safemin = 2e-45f
@@ -549,9 +456,7 @@ private fun computeHouseholderReflectorInplace(
         alphi *= rsafemin
         alphr *= safemin
 
-        if (abs(beta) < safemin && knt < 20) {
-            continue
-        }
+        if (abs(beta) < safemin && knt < 20) continue
 
         xnorm = 0f
         for (i in 0 until n - 1) {
@@ -569,16 +474,12 @@ private fun computeHouseholderReflectorInplace(
     for (j in 1..knt) {
         beta *= safemin
     }
-
-
     return Pair(beta.toComplexFloat(), tau)
 }
 
 private fun computeHouseholderReflectorInplace(n: Int, alpha: ComplexDouble, x: D1Array<ComplexDouble>): Pair<ComplexDouble, ComplexDouble> {
     var tmp = alpha
-    if (n <= 0) {
-        return Pair(tmp, ComplexDouble.zero)
-    }
+    if (n <= 0) return Pair(tmp, ComplexDouble.zero)
     var xnorm = 0.0
     for (i in 0 until n - 1) {
         xnorm += (x[i] * x[i].conjugate()).re
@@ -587,9 +488,7 @@ private fun computeHouseholderReflectorInplace(n: Int, alpha: ComplexDouble, x: 
     var alphr = alpha.re
     var alphi = alpha.im
 
-    if (xnorm == 0.0 && alphi == 0.0) {
-        return Pair(tmp, ComplexDouble.zero)
-    }
+    if (xnorm == 0.0 && alphi == 0.0) return Pair(tmp, ComplexDouble.zero)
 
     var beta = -signum(alphr) * sqrt(alphr * alphr + alphi * alphi + xnorm * xnorm)
     val safemin = 2e-300
@@ -603,9 +502,7 @@ private fun computeHouseholderReflectorInplace(n: Int, alpha: ComplexDouble, x: 
         alphi *= rsafemin
         alphr *= safemin
 
-        if (abs(beta) < safemin && knt < 20) {
-            continue
-        }
+        if (abs(beta) < safemin && knt < 20) continue
 
         xnorm = 0.0
         for (i in 0 until n - 1) {
@@ -623,8 +520,6 @@ private fun computeHouseholderReflectorInplace(n: Int, alpha: ComplexDouble, x: 
     for (j in 1..knt) {
         beta *= safemin
     }
-
-
     return Pair(beta.toComplexDouble(), tau)
 }
 

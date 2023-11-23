@@ -22,7 +22,6 @@ internal fun gramShmidtComplexFloat(a: MultiArray<ComplexFloat, D2>): D2Array<Co
         }
     }
 
-
     //normalize all vectors to have unit length
     for (i in 0 until ans.shape[0]) {
         var norm = 0f
@@ -30,9 +29,7 @@ internal fun gramShmidtComplexFloat(a: MultiArray<ComplexFloat, D2>): D2Array<Co
             norm += (ans[i, j] * ans[i, j].conjugate()).re
         }
         norm = sqrt(abs(norm))
-        if (norm < precision) {
-            continue
-        }
+        if (norm < precision) continue
         for (j in 0 until ans.shape[1]) {
             ans[i, j] = ans[i, j] / norm
         }
@@ -55,14 +52,11 @@ internal fun gramShmidtComplexFloat(a: MultiArray<ComplexFloat, D2>): D2Array<Co
             norm += (ans[currow, j] * ans[currow, j].conjugate()).re
         }
         norm = sqrt(abs(norm))
-        if(norm < precision) {
-            continue
-        }
+        if (norm < precision) continue
         for (j in 0 until ans.shape[1]) {
             ans[currow, j] = ans[currow, j] / norm
         }
     }
-
     return ans.transpose()
 }
 
@@ -78,8 +72,6 @@ internal fun gramShmidtComplexDouble(a: MultiArray<ComplexDouble, D2>): D2Array<
             ans[i, j] = a[j, i]
         }
     }
-
-
     //normalize all vectors to have unit length
     for (i in 0 until ans.shape[0]) {
         var norm = 0.0
@@ -87,9 +79,7 @@ internal fun gramShmidtComplexDouble(a: MultiArray<ComplexDouble, D2>): D2Array<
             norm += (ans[i, j] * ans[i, j].conjugate()).re
         }
         norm = sqrt(abs(norm))
-        if (norm < precision) {
-            continue
-        }
+        if (norm < precision) continue
         for (j in 0 until ans.shape[1]) {
             ans[i, j] = ans[i, j] / norm
         }
@@ -112,13 +102,10 @@ internal fun gramShmidtComplexDouble(a: MultiArray<ComplexDouble, D2>): D2Array<
             norm += (ans[currow, j] * ans[currow, j].conjugate()).re
         }
         norm = sqrt(abs(norm))
-        if(norm < precision) {
-            continue
-        }
+        if (norm < precision) continue
         for (j in 0 until ans.shape[1]) {
             ans[currow, j] = ans[currow, j] / norm
         }
     }
-
     return ans.transpose()
 }

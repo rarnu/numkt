@@ -431,7 +431,7 @@ class ComplexFloat private constructor(private val number: Long) : Complex {
         else -> re == other.re && im == other.im
     }
 
-    override fun equals(other: Any?): Boolean= when {
+    override fun equals(other: Any?): Boolean = when {
         this === other -> true
         other is ComplexFloat -> re == other.re && im == other.im
         else -> false
@@ -448,4 +448,6 @@ class ComplexFloat private constructor(private val number: Long) : Complex {
      * @return the string representation of the complex number object
      */
     override fun toString(): String = "$re+($im)i"
+
+    fun toComplexDouble(): ComplexDouble = ComplexDouble(re, im)
 }

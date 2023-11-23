@@ -43,10 +43,8 @@ internal fun norm1(mat: FloatArray, offset: Int, strides: IntArray, n: Int, m: I
     for (j in 0 until m) {
         val matIdx = j * stride1
         var sum = 0f
-        for (i in 0 until n)
-            sum += abs(mat[matIdx + (i * stride0 + offset)])
-        if (result < sum)
-            result = sum
+        for (i in 0 until n) sum += abs(mat[matIdx + (i * stride0 + offset)])
+        if (result < sum) result = sum
     }
 
     return result
@@ -59,10 +57,8 @@ internal fun norm1(mat: DoubleArray, offset: Int, strides: IntArray, n: Int, m: 
     for (j in 0 until m) {
         val matIdx = j * stride1
         var sum = .0
-        for (i in 0 until n)
-            sum += abs(mat[matIdx + (i * stride0 + offset)])
-        if (result < sum)
-            result = sum
+        for (i in 0 until n) sum += abs(mat[matIdx + (i * stride0 + offset)])
+        if (result < sum) result = sum
     }
 
     return result
@@ -76,11 +72,9 @@ internal fun normMax(mat: FloatArray, offset: Int, strides: IntArray, n: Int, m:
         val matIdx = i * stride0 + offset
         for (j in 0 until m) {
             val element = abs(mat[matIdx + j * stride1])
-            if (result < element)
-                result = element
+            if (result < element) result = element
         }
     }
-
     return result
 }
 
@@ -92,12 +86,9 @@ internal fun normMax(mat: DoubleArray, offset: Int, strides: IntArray, n: Int, m
         val matIdx = i * stride0 + offset
         for (j in 0 until m) {
             val element = abs(mat[matIdx + j * stride1])
-            if (result < element)
-                result = element
+            if (result < element) result = element
         }
     }
-
-
     return result
 }
 
@@ -108,12 +99,9 @@ internal fun normInf(mat: FloatArray, offset: Int, strides: IntArray, n: Int, m:
     for (i in 0 until n) {
         val matIdx = i * stride0 + offset
         var sum = 0f
-        for (j in 0 until m)
-            sum += abs(mat[matIdx + j * stride1])
-        if (result < sum)
-            result = sum
+        for (j in 0 until m) sum += abs(mat[matIdx + j * stride1])
+        if (result < sum) result = sum
     }
-
     return result
 }
 
@@ -124,33 +112,9 @@ internal fun normInf(mat: DoubleArray, offset: Int, strides: IntArray, n: Int, m
     for (i in 0 until n) {
         val matIdx = i * stride0 + offset
         var sum = .0
-        for (j in 0 until m)
-            sum += abs(mat[matIdx + j * stride1])
-        if (result < sum)
-            result = sum
+        for (j in 0 until m) sum += abs(mat[matIdx + j * stride1])
+        if (result < sum) result = sum
     }
 
     return result
 }
-
-//internal fun <T : Number> norm(
-//    mat: ImmutableMemoryView<T>, matOffset: Int, matStrides: IntArray, n: Int, m: Int, power: Int, consistent: Boolean
-//): Double {
-//    var result = 0.0
-//
-//    val (matStride_0, matStride_1) = matStrides
-//
-//    if (consistent) {
-//        result = mat.sumOf { abs(it.toDouble()).pow(power) }
-//    } else {
-//        for (i in 0 until n) {
-//            val matInd = i * matStride_0 + matOffset
-//            for (k in 0 until m) {
-//                val absValue = abs(mat[matInd + k * matStride_1].toDouble())
-//                result += absValue.pow(power)
-//            }
-//        }
-//    }
-//
-//    return result.pow(1.0 / power)
-//}

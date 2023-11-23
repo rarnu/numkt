@@ -434,6 +434,8 @@ sealed interface ComplexDouble : Complex {
      * @return the imaginary part of the complex number as a Double value.
      */
     operator fun component2(): Double = im
+
+    fun toComplexFloat(): ComplexFloat = ComplexFloat(re, im)
 }
 
 /**
@@ -488,4 +490,5 @@ class ComplexDouble32 internal constructor(private val number: Long) : ComplexDo
     internal fun hash(): Int = 31 * number.hashCode()
 
     override fun toString(): String = "$re+($im)i"
+
 }
