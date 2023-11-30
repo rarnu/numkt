@@ -1,4 +1,4 @@
-package numkt_kotlin.statistics
+package com.rarnu.numkt.test.kotlin.statistics
 
 import com.rarnu.numkt.api.arange
 import com.rarnu.numkt.api.Numkt
@@ -10,26 +10,26 @@ import kotlin.test.assertEquals
 class KEStatisticsTest {
 
     @Test
-    fun test_median() {
+    fun testMedian() {
         val a = Numkt.ndarray(Numkt[Numkt[10, 7, 4], Numkt[3, 2, 1]])
         assertEquals(3.5, Numkt.stat.median(a))
     }
 
     @Test
-    fun test_simple_average() {
+    fun testSimpleAverage() {
         val a = Numkt.arange<Long>(1, 11, 1)
         assertEquals(Numkt.stat.mean(a), Numkt.stat.average(a))
     }
 
     @Test
-    fun test_average_with_weights() {
+    fun testAverageWithWeights() {
         val a = Numkt.arange<Long>(1, 11, 1)
         val weights = Numkt.arange<Long>(10, 0, -1)
         assertEquals(4.0, Numkt.stat.average(a, weights))
     }
 
     @Test
-    fun test_of_mean_function_on_a_3d_ndarray() {
+    fun testOfMeanFunctionOnA3dNdarray() {
         val ndarray = Numkt.ndarray(Numkt[Numkt[Numkt[0, 3], Numkt[1, 4]], Numkt[Numkt[2, 5], Numkt[6, 8]], Numkt[Numkt[7, 9], Numkt[10, 11]]])
 
         val expectedWith0Axis = Numkt.ndarray(Numkt[Numkt[3.0, 5.666666666666667], Numkt[5.666666666666667, 7.666666666666667]])
@@ -42,13 +42,13 @@ class KEStatisticsTest {
     }
 
     @Test
-    fun test_of_mean_function_on_a_flat_ndarray() {
+    fun testOfMeanFunctionOnAFlatNdarray() {
         val ndarray = Numkt.ndarray(Numkt[1, 2, 3, 4])
         assertEquals(2.5, KEStatistics.mean(ndarray))
     }
 
     @Test
-    fun test_of_mean_function_on_a_2d_ndarray() {
+    fun testOfMeanFunctionOnA2dNdarray() {
         val ndarray = Numkt.ndarray(Numkt[Numkt[1, 2], Numkt[3, 4]])
         assertEquals(2.5, KEStatistics.mean(ndarray))
     }

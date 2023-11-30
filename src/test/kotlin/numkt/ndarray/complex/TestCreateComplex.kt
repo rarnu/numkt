@@ -1,4 +1,4 @@
-package numkt.ndarray.complex
+package com.rarnu.numkt.test.numkt.ndarray.complex
 
 import com.rarnu.numkt.ndarray.complex.*
 import org.junit.Assert.assertEquals

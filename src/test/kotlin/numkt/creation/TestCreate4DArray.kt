@@ -1,4 +1,4 @@
-package numkt.creation
+package com.rarnu.numkt.test.numkt.creation
 
 import com.rarnu.numkt.api.*
 import com.rarnu.numkt.ndarray.complex.*
@@ -6,7 +6,7 @@ import com.rarnu.numkt.ndarray.data.D4Array
 import com.rarnu.numkt.ndarray.operations.all
 import com.rarnu.numkt.ndarray.operations.toListD4
 import com.rarnu.numkt.ndarray.operations.toSet
-import numkt.shouldBe
+import com.rarnu.numkt.test.numkt.shouldBe
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test

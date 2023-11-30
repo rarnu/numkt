@@ -1,4 +1,4 @@
-package numkt
+package com.rarnu.numkt.test.numkt
 
 import com.rarnu.numkt.ndarray.complex.ComplexDoubleArray
 import com.rarnu.numkt.ndarray.complex.ComplexFloatArray

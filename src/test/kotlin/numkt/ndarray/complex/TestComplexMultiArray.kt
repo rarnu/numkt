@@ -1,4 +1,4 @@
-package numkt.ndarray.complex
+package com.rarnu.numkt.test.numkt.ndarray.complex
 
 import com.rarnu.numkt.api.d2arrayIndices
 import com.rarnu.numkt.api.Numkt

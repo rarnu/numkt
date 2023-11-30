@@ -1,4 +1,4 @@
-package sample.real
+package com.rarnu.numkt.test.numkt.sample.real
 
 import com.rarnu.numkt.api.*
 import com.rarnu.numkt.ndarray.complex.ComplexFloat

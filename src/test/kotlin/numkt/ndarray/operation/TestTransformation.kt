@@ -1,4 +1,4 @@
-package numkt.ndarray.operation
+package com.rarnu.numkt.test.numkt.ndarray.operation
 
 import com.rarnu.numkt.api.Numkt
 import com.rarnu.numkt.api.ndarray

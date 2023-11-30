@@ -1,4 +1,4 @@
-package sample
+package com.rarnu.numkt.test.numkt.sample
 
 import com.rarnu.numkt.api.*
 import com.rarnu.numkt.ndarray.data.D2

@@ -1,4 +1,4 @@
-package npy
+package com.rarnu.numkt.test.numkt.npy
 
 import java.io.IOException
 import java.nio.file.Files

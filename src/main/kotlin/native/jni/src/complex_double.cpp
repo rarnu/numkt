@@ -1,4 +1,5 @@
 #include "jni.h"
+#include <stdint.h>
 
 static jmethodID newComplexDoubleID = nullptr;
 

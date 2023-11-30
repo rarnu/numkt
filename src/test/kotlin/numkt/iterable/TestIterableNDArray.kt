@@ -1,4 +1,4 @@
-package numkt.iterable
+package com.rarnu.numkt.test.numkt.iterable
 
 import com.rarnu.numkt.api.*
 import com.rarnu.numkt.ndarray.data.set

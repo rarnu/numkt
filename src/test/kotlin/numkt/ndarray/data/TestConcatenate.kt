@@ -1,4 +1,4 @@
-package numkt.ndarray.data
+package com.rarnu.numkt.test.numkt.ndarray.data
 
 import com.rarnu.numkt.api.Numkt
 import com.rarnu.numkt.api.zeros

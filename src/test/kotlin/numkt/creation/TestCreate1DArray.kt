@@ -1,4 +1,4 @@
-package numkt.creation
+package com.rarnu.numkt.test.numkt.creation
 
 import com.rarnu.numkt.api.*
 import com.rarnu.numkt.ndarray.complex.*
@@ -7,7 +7,7 @@ import com.rarnu.numkt.ndarray.operations.all
 import com.rarnu.numkt.ndarray.operations.map
 import com.rarnu.numkt.ndarray.operations.toList
 import com.rarnu.numkt.ndarray.operations.toSet
-import numkt.shouldBe
+import com.rarnu.numkt.test.numkt.shouldBe
 import org.junit.Assert.*
 import org.junit.Test
 import kotlin.math.round

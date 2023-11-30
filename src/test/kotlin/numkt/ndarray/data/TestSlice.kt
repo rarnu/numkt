@@ -1,6 +1,6 @@
 @file:Suppress("EmptyRange")
 
-package numkt.ndarray.data
+package com.rarnu.numkt.test.numkt.ndarray.data
 
 import com.rarnu.numkt.api.*
 import com.rarnu.numkt.ndarray.data.bounds

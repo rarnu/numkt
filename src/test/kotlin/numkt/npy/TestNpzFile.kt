@@ -1,4 +1,4 @@
-package npy
+package com.rarnu.numkt.test.numkt.npy
 
 import com.rarnu.numkt.api.bio.npy.NpzFile
 import org.junit.Assert.assertArrayEquals

@@ -1,4 +1,4 @@
-package numkt_kotlin.math
+package com.rarnu.numkt.test.kotlin.math
 
 import com.rarnu.numkt.api.identity
 import com.rarnu.numkt.api.Numkt
@@ -15,7 +15,7 @@ import kotlin.test.assertFailsWith
 class KEMathTest {
 
     @Test
-    fun test_of_argMax_function_Double() {
+    fun testOfArgMaxFunctionDouble() {
         val ndarray1 = Numkt.ndarray(Numkt[0.008830892, 0.7638366187, -0.0401326368965, -0.269757419187])
         val ndarray2 = Numkt.ndarray(Numkt[0.0088308926050, 0.763836618743, Double.NaN, -0.2697574191872])
 
@@ -24,7 +24,7 @@ class KEMathTest {
     }
 
     @Test
-    fun test_of_argMax_function_with_axis() {
+    fun testOfArgMaxFunctionWithAxis() {
         val ndarray = Numkt.ndarray(Numkt[Numkt[Numkt[50, 3], Numkt[1, 4]], Numkt[Numkt[2, 5], Numkt[6, 8]], Numkt[Numkt[7, 9], Numkt[10, 11]]])
 
         val expectedWith0Axis = Numkt.ndarray(Numkt[Numkt[0, 2], Numkt[2, 2]])
@@ -36,7 +36,7 @@ class KEMathTest {
     }
 
     @Test
-    fun test_of_argMin_function_with_axis() {
+    fun testOfArgMinFunctionWithAxis() {
         val ndarray = Numkt.ndarray(Numkt[Numkt[Numkt[50, 3], Numkt[1, 4]], Numkt[Numkt[2, 5], Numkt[6, 8]], Numkt[Numkt[7, 9], Numkt[10, 11]]])
 
         val expectedWith0Axis = Numkt.ndarray(Numkt[Numkt[1, 0], Numkt[0, 0]])
@@ -48,7 +48,7 @@ class KEMathTest {
     }
 
     @Test
-    fun test_of_max_function_with_axis() {
+    fun testOfMaxFunctionWithAxis() {
         val ndarray = Numkt.ndarray(Numkt[Numkt[Numkt[0, 3], Numkt[1, 4]], Numkt[Numkt[2, 5], Numkt[6, 8]], Numkt[Numkt[7, 9], Numkt[10, 11]]])
 
         val expectedWith0Axis = Numkt.ndarray(Numkt[Numkt[7, 9], Numkt[10, 11]])
@@ -61,7 +61,7 @@ class KEMathTest {
     }
 
     @Test
-    fun test_of_min_function_with_axis() {
+    fun testOfMinFunctionWithAxis() {
         val ndarray = Numkt.ndarray(Numkt[Numkt[Numkt[0, 3], Numkt[1, 4]], Numkt[Numkt[2, 5], Numkt[6, 8]], Numkt[Numkt[7, 9], Numkt[10, 11]]])
 
         val expectedWith0Axis = Numkt.ndarray(Numkt[Numkt[0, 3], Numkt[1, 4]])
@@ -74,13 +74,13 @@ class KEMathTest {
     }
 
     @Test
-    fun test_of_sum_function_with_axis_on_flat_ndarray() {
+    fun testOfSumFunctionWithAxisOnFlatNdarray() {
         val ndarray = Numkt.ndarray(Numkt[0, 3, 1, 4])
         assertFailsWith<IllegalArgumentException> { KEMath.sum<Int, D1, D1>(ndarray, 0) }
     }
 
     @Test
-    fun test_of_sum_function_with_axis_on_2d_ndarray() {
+    fun testOfSumFunctionWithAxisOn2dNdarray() {
         val ndarray = Numkt.ndarray(Numkt[Numkt[0, 3], Numkt[1, 4]])
 
         val expectedWith0Axis = Numkt.ndarray(Numkt[1, 7])
@@ -91,7 +91,7 @@ class KEMathTest {
     }
 
     @Test
-    fun test_of_sum_function_with_axis_on_3d_ndarray() {
+    fun testOfSumFunctionWithAxisOn3dNdarray() {
         val ndarray = Numkt.ndarray(Numkt[Numkt[Numkt[0, 3], Numkt[1, 4]], Numkt[Numkt[2, 5], Numkt[6, 8]], Numkt[Numkt[7, 9], Numkt[10, 11]]])
 
         val expectedWith0Axis = Numkt.ndarray(Numkt[Numkt[9, 17], Numkt[17, 23]])
@@ -104,21 +104,17 @@ class KEMathTest {
     }
 
     @Test
-    fun test_of_sum_function_with_third_axis_on_2d_ndarray() {
+    fun testOfSumFunctionWithThirdAxisOn2dNdarray() {
         val ndarray = Numkt.ndarray(Numkt[Numkt[0, 3], Numkt[1, 4]])
         assertFailsWith<IllegalArgumentException> { KEMath.sumD2(ndarray, 2) }
     }
 
     @Test
-    fun test_of_cumSum_function_with_axis_on_3d_ndarray() {
+    fun testOfCumSumFunctionWithAxisOn3dNdarray() {
         val ndarray = Numkt.ndarray(Numkt[Numkt[Numkt[0, 3], Numkt[1, 4]], Numkt[Numkt[2, 5], Numkt[6, 8]], Numkt[Numkt[7, 9], Numkt[10, 11]]])
-
-        val expectedWith0Axis =
-            Numkt.ndarray(Numkt[Numkt[Numkt[0, 3], Numkt[1, 4]], Numkt[Numkt[2, 8], Numkt[7, 12]], Numkt[Numkt[9, 17], Numkt[17, 23]]])
-        val expectedWith1Axis =
-            Numkt.ndarray(Numkt[Numkt[Numkt[0, 3], Numkt[1, 7]], Numkt[Numkt[2, 5], Numkt[8, 13]], Numkt[Numkt[7, 9], Numkt[17, 20]]])
-        val expectedWith2Axis =
-            Numkt.ndarray(Numkt[Numkt[Numkt[0, 3], Numkt[1, 5]], Numkt[Numkt[2, 7], Numkt[6, 14]], Numkt[Numkt[7, 16], Numkt[10, 21]]])
+        val expectedWith0Axis = Numkt.ndarray(Numkt[Numkt[Numkt[0, 3], Numkt[1, 4]], Numkt[Numkt[2, 8], Numkt[7, 12]], Numkt[Numkt[9, 17], Numkt[17, 23]]])
+        val expectedWith1Axis = Numkt.ndarray(Numkt[Numkt[Numkt[0, 3], Numkt[1, 7]], Numkt[Numkt[2, 5], Numkt[8, 13]], Numkt[Numkt[7, 9], Numkt[17, 20]]])
+        val expectedWith2Axis = Numkt.ndarray(Numkt[Numkt[Numkt[0, 3], Numkt[1, 5]], Numkt[Numkt[2, 7], Numkt[6, 14]], Numkt[Numkt[7, 16], Numkt[10, 21]]])
 
         assertEquals(expectedWith0Axis, Numkt.math.cumSum(ndarray, axis = 0))
         assertEquals(expectedWith1Axis, Numkt.math.cumSum(ndarray, axis = 1))
@@ -126,7 +122,7 @@ class KEMathTest {
     }
 
     @Test
-    fun test_multiplication_of_complex_2d_ndarray() {
+    fun testMultiplicationOfComplex2dNdarray() {
         val result = ComplexFloat(-2) * Numkt.identity(3)
         assertEquals(ComplexFloat(-2), result[0, 0])
     }
