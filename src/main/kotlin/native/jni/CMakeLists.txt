@@ -18,7 +18,7 @@ set(DYNAMIC_LIST)
 
 message("TARGET_OS: ${TARGET_OS}")
 
-if (${TARGET_OS} MATCHES "linux-x86_64")
+if (${TARGET_OS} MATCHES "Linux-x86_64")
     message("current os is linuxX64")
     set(suffix linuxX64)
     set(NO_AVX512 0)
