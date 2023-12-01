@@ -6,8 +6,8 @@ import com.rarnu.numkt.ndarray.complex.i
 import com.rarnu.numkt.ndarray.complex.plus
 import com.rarnu.numkt.ndarray.data.DataType
 import com.rarnu.numkt.ndarray.operations.toList
-import org.junit.Assert.assertEquals
-import org.junit.Test
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class TestCreation {
 

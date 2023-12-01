@@ -4,10 +4,9 @@ import com.rarnu.numkt.api.Numkt
 import com.rarnu.numkt.api.zeros
 import com.rarnu.numkt.ndarray.data.NDArray
 import com.rarnu.numkt.ndarray.data.requireEqualShape
-import org.junit.Assert.assertTrue
-import org.junit.Assert.fail
-import org.junit.Test
-
+import kotlin.test.Test
+import kotlin.test.assertTrue
+import kotlin.test.fail
 
 class TestInternals {
 

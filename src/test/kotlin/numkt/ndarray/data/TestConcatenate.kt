@@ -7,9 +7,9 @@ import com.rarnu.numkt.ndarray.data.Slice
 import com.rarnu.numkt.ndarray.data.get
 import com.rarnu.numkt.ndarray.operations.asSequence
 import com.rarnu.numkt.ndarray.operations.plus
-import org.junit.Assert.assertArrayEquals
-import org.junit.Assert.assertFalse
-import org.junit.Test
+import kotlin.test.Test
+import kotlin.test.assertContentEquals
+import kotlin.test.assertFalse
 
 class TestConcatenate {
     @Test
@@ -22,7 +22,7 @@ class TestConcatenate {
 
         val result = arr1.cat(listOf(arr2, arr3, arr4), 0)
 
-        assertArrayEquals(doubleArrayOf(1.0, 2.0, 2.0, 3.0, 3.0, 3.0, 4.0, 4.0, 4.0, 4.0).toTypedArray(), result.data.getDoubleArray().toTypedArray())
+        assertContentEquals(doubleArrayOf(1.0, 2.0, 2.0, 3.0, 3.0, 3.0, 4.0, 4.0, 4.0, 4.0).toTypedArray(), result.data.getDoubleArray().toTypedArray())
 
     }
 
@@ -38,7 +38,7 @@ class TestConcatenate {
         assertFalse(arr5.consistent)
         val result = arr1.cat(listOf(arr2, arr3, arr5), 0)
 
-        assertArrayEquals(doubleArrayOf(1.0, 2.0, 2.0, 3.0, 3.0, 3.0, 4.0, 4.0, 4.0, 4.0).toTypedArray(), result.data.getDoubleArray().toTypedArray())
+        assertContentEquals(doubleArrayOf(1.0, 2.0, 2.0, 3.0, 3.0, 3.0, 4.0, 4.0, 4.0, 4.0).toTypedArray(), result.data.getDoubleArray().toTypedArray())
 
     }
 
@@ -54,7 +54,7 @@ class TestConcatenate {
 
         val realResult = result.asSequence().map { it.re }.toList().toDoubleArray()
 
-        assertArrayEquals(doubleArrayOf(1.0, 2.0, 2.0, 3.0, 3.0, 3.0, 4.0, 4.0, 4.0, 4.0).toTypedArray(), realResult.toTypedArray())
+        assertContentEquals(doubleArrayOf(1.0, 2.0, 2.0, 3.0, 3.0, 3.0, 4.0, 4.0, 4.0, 4.0).toTypedArray(), realResult.toTypedArray())
 
     }
 }

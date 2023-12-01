@@ -3,8 +3,10 @@ package com.rarnu.numkt.test.numkt.iterable
 import com.rarnu.numkt.api.*
 import com.rarnu.numkt.ndarray.data.set
 import com.rarnu.numkt.ndarray.operations.*
-import org.junit.Assert.*
-import org.junit.Test
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 class TestIterableNDArray {
 

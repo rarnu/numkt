@@ -9,6 +9,8 @@ import com.rarnu.numkt.api.linalg.LinAlg
 import com.rarnu.numkt.api.stat.Statistics
 import com.rarnu.numkt.api.math.Math
 
+typealias N = Numkt
+
 /**
  * The basic object through which calls all ndarray functions. Gives access to ndarray creation and interfaces [Math],
  * [LinAlg] and [Statistics].

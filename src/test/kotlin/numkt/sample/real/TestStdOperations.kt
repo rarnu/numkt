@@ -5,8 +5,8 @@ import com.rarnu.numkt.api.ndarray
 import com.rarnu.numkt.ndarray.operations.filter
 import com.rarnu.numkt.ndarray.operations.map
 import com.rarnu.numkt.ndarray.operations.reduce
-import org.junit.Assert.assertEquals
-import org.junit.Test
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class TestStdOperations {
 

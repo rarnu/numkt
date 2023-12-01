@@ -7,9 +7,10 @@ import com.rarnu.numkt.ndarray.data.bounds
 import com.rarnu.numkt.ndarray.data.get
 import com.rarnu.numkt.ndarray.data.rangeTo
 import com.rarnu.numkt.ndarray.data.sl
-import org.junit.Assert.*
-import org.junit.Test
-
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertSame
+import kotlin.test.assertTrue
 
 class TestSlice {
 

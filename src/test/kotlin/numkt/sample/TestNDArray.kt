@@ -5,9 +5,8 @@ import com.rarnu.numkt.ndarray.data.D2
 import com.rarnu.numkt.ndarray.data.D3
 import com.rarnu.numkt.ndarray.data.DN
 import com.rarnu.numkt.ndarray.data.DataType
-import org.junit.Assert.assertEquals
-import org.junit.Test
-
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class TestNDArray {
     @Test

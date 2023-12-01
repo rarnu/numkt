@@ -8,10 +8,10 @@ import com.rarnu.numkt.ndarray.operations.all
 import com.rarnu.numkt.ndarray.operations.toListD2
 import com.rarnu.numkt.ndarray.operations.toSet
 import com.rarnu.numkt.test.numkt.shouldBe
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
-import org.junit.Test
 import kotlin.math.round
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class TestCreate2DArray {
 
@@ -60,9 +60,9 @@ class TestCreate2DArray {
         for (i in 0 until n) {
             for (j in 0 until n) {
                 if (i == j) {
-                    assertEquals("Expected diagonal elements to be 1", 1.toByte(), a[i, j])
+                    assertEquals(1.toByte(), a[i, j])
                 } else {
-                    assertEquals("Expected non-diagonal elements to be 0", 0.toByte(), a[i, j])
+                    assertEquals(0.toByte(), a[i, j])
                 }
             }
         }
@@ -197,9 +197,9 @@ class TestCreate2DArray {
         for (i in 0 until n) {
             for (j in 0 until n) {
                 if (i == j) {
-                    assertEquals("Expected diagonal elements to be 1", 1.toShort(), a[i, j])
+                    assertEquals(1.toShort(), a[i, j])
                 } else {
-                    assertEquals("Expected non-diagonal elements to be 0", 0.toShort(), a[i, j])
+                    assertEquals(0.toShort(), a[i, j])
                 }
             }
         }
@@ -336,9 +336,9 @@ class TestCreate2DArray {
         for (i in 0 until n) {
             for (j in 0 until n) {
                 if (i == j) {
-                    assertEquals("Expected diagonal elements to be 1", 1, a[i, j])
+                    assertEquals(1, a[i, j])
                 } else {
-                    assertEquals("Expected non-diagonal elements to be 0", 0, a[i, j])
+                    assertEquals(0, a[i, j])
                 }
             }
         }
@@ -475,9 +475,9 @@ class TestCreate2DArray {
         for (i in 0 until n) {
             for (j in 0 until n) {
                 if (i == j) {
-                    assertEquals("Expected diagonal elements to be 1", 1L, a[i, j])
+                    assertEquals(1L, a[i, j])
                 } else {
-                    assertEquals("Expected non-diagonal elements to be 0", 0L, a[i, j])
+                    assertEquals(0L, a[i, j])
                 }
             }
         }
@@ -612,9 +612,9 @@ class TestCreate2DArray {
         for (i in 0 until n) {
             for (j in 0 until n) {
                 if (i == j) {
-                    assertEquals("Expected diagonal elements to be 1.0", 1f, a[i, j])
+                    assertEquals(1f, a[i, j])
                 } else {
-                    assertEquals("Expected non-diagonal elements to be 0.0", 0f, a[i, j])
+                    assertEquals(0f, a[i, j])
                 }
             }
         }
@@ -749,9 +749,9 @@ class TestCreate2DArray {
         for (i in 0 until n) {
             for (j in 0 until n) {
                 if (i == j) {
-                    assertEquals("Expected diagonal elements to be 1.0", 1.0, a[i, j], 0.01)
+                    assertEquals(1.0, a[i, j], 0.01)
                 } else {
-                    assertEquals("Expected non-diagonal elements to be 0.0", 0.0, a[i, j], 0.01)
+                    assertEquals(0.0, a[i, j], 0.01)
                 }
             }
         }
@@ -888,9 +888,9 @@ class TestCreate2DArray {
         for (i in 0 until n) {
             for (j in 0 until n) {
                 if (i == j) {
-                    assertEquals("Expected diagonal elements to be ${ComplexFloat.one}", ComplexFloat.one, a[i, j])
+                    assertEquals(ComplexFloat.one, a[i, j])
                 } else {
-                    assertEquals("Expected non-diagonal elements to be ${ComplexFloat.zero}", ComplexFloat.zero, a[i, j])
+                    assertEquals(ComplexFloat.zero, a[i, j])
                 }
             }
         }
@@ -1012,9 +1012,9 @@ class TestCreate2DArray {
         for (i in 0 until n) {
             for (j in 0 until n) {
                 if (i == j) {
-                    assertEquals("Expected diagonal elements to be ${ComplexDouble.one}", ComplexDouble.one, a[i, j])
+                    assertEquals(ComplexDouble.one, a[i, j])
                 } else {
-                    assertEquals("Expected non-diagonal elements to be ${ComplexDouble.zero}", ComplexDouble.zero, a[i, j])
+                    assertEquals(ComplexDouble.zero, a[i, j])
                 }
             }
         }

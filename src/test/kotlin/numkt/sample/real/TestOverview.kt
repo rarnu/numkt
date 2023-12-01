@@ -3,8 +3,8 @@ package com.rarnu.numkt.test.numkt.sample.real
 import com.rarnu.numkt.api.Numkt
 import com.rarnu.numkt.api.ndarray
 import com.rarnu.numkt.ndarray.operations.times
-import org.junit.Assert.assertEquals
-import org.junit.Test
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class TestOverview {
     @Test

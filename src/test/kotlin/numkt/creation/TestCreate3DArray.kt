@@ -7,10 +7,10 @@ import com.rarnu.numkt.ndarray.operations.all
 import com.rarnu.numkt.ndarray.operations.toListD3
 import com.rarnu.numkt.ndarray.operations.toSet
 import com.rarnu.numkt.test.numkt.shouldBe
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
-import org.junit.Test
 import kotlin.math.round
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 
 class TestCreate3DArray {

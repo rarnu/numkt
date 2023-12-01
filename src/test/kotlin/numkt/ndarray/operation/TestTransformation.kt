@@ -4,10 +4,10 @@ import com.rarnu.numkt.api.Numkt
 import com.rarnu.numkt.api.ndarray
 import com.rarnu.numkt.ndarray.operations.clip
 import com.rarnu.numkt.ndarray.operations.toList
-import org.junit.Assert.assertArrayEquals
-import org.junit.Assert.assertEquals
-import org.junit.Test
 import kotlin.random.Random
+import kotlin.test.Test
+import kotlin.test.assertContentEquals
+import kotlin.test.assertEquals
 
 class TestTransformation {
 
@@ -15,21 +15,21 @@ class TestTransformation {
     fun clip1DIntDataType() {
         val a = Numkt.ndarray(Numkt[1, 2, 3, 4, 5])
         val result = a.clip(2, 4)
-        assertArrayEquals(listOf(2, 2, 3, 4, 4).toTypedArray(), result.toList().toTypedArray())
+        assertContentEquals(listOf(2, 2, 3, 4, 4).toTypedArray(), result.toList().toTypedArray())
     }
 
     @Test
     fun clip1DShortDataType() {
         val a = Numkt.ndarray<Short>(Numkt[1, 2, 3, 4, 5])
         val result = a.clip(2, 4)
-        assertArrayEquals(listOf<Short>(2, 2, 3, 4, 4).toTypedArray(), result.toList().toTypedArray())
+        assertContentEquals(listOf<Short>(2, 2, 3, 4, 4).toTypedArray(), result.toList().toTypedArray())
     }
 
     @Test
     fun clip1DLongDataType() {
         val a = Numkt.ndarray<Long>(Numkt[1, 2, 3, 4, 5])
         val result = a.clip(2, 4)
-        assertArrayEquals(listOf<Long>(2, 2, 3, 4, 4).toTypedArray(), result.toList().toTypedArray())
+        assertContentEquals(listOf<Long>(2, 2, 3, 4, 4).toTypedArray(), result.toList().toTypedArray())
     }
 
     @Test
@@ -51,7 +51,7 @@ class TestTransformation {
         val a = Numkt.ndarray(inputArray, 2, 5, 6)
         val min = 1.toByte()
         val expected = ByteArray(60) { min }
-        assertArrayEquals(expected.toList().toTypedArray(), a.clip(min, min).toList().toTypedArray())
+        assertContentEquals(expected.toList().toTypedArray(), a.clip(min, min).toList().toTypedArray())
     }
 
     @Test
@@ -61,6 +61,6 @@ class TestTransformation {
         val max = 42.0
         val expected = inputArray.copyOf().map { if (it < min) min else if (it > max) max else it }
         val a = Numkt.ndarray(inputArray, 2, 5, 3, 2)
-        assertArrayEquals(expected.toList().toTypedArray(), a.clip(min, max).toList().toTypedArray())
+        assertContentEquals(expected.toList().toTypedArray(), a.clip(min, max).toList().toTypedArray())
     }
 }

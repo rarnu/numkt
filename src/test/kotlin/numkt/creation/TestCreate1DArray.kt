@@ -8,9 +8,11 @@ import com.rarnu.numkt.ndarray.operations.map
 import com.rarnu.numkt.ndarray.operations.toList
 import com.rarnu.numkt.ndarray.operations.toSet
 import com.rarnu.numkt.test.numkt.shouldBe
-import org.junit.Assert.*
-import org.junit.Test
 import kotlin.math.round
+import kotlin.test.Test
+import kotlin.test.assertContentEquals
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class TestCreate1DArray {
 
@@ -1233,7 +1235,7 @@ class TestCreate1DArray {
     fun createOneDimensionalArrayFromComplexFloatList() {
         val list = complexFloatList
         val a: D1Array<ComplexFloat> = Numkt.ndarray(list)
-        assertArrayEquals(list.toTypedArray(), a.toList().toTypedArray())
+        assertContentEquals(list.toTypedArray(), a.toList().toTypedArray())
     }
 
 

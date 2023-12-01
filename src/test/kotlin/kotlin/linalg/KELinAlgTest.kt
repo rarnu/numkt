@@ -15,12 +15,14 @@ import com.rarnu.numkt.ndarray.operations.map
 import com.rarnu.numkt.ndarray.operations.minus
 import com.rarnu.numkt.ndarray.operations.plus
 import com.rarnu.numkt.test.native.assertFloatingComplexNumber
-import org.junit.Assert.*
-import org.junit.Test
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.random.Random
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
+import kotlin.test.assertTrue
 
 class KELinAlgTest {
 
@@ -141,7 +143,7 @@ class KELinAlgTest {
         val b13 = Numkt.ndarray(Numkt[Numkt[3.0, 4.0, 5.0]])
         // assertClose(solve(a11, b11), Numkt.ndarray(Numkt[Numkt[0.75]]), procedurePrecision)
         assertClose(solve(a11, b1), Numkt.ndarray(Numkt[1.25]), procedurePrecision)
-        assertThrows(IllegalArgumentException::class.java) { solve(a11, b3) }
+        assertFailsWith<IllegalArgumentException> { solve(a11, b3) }
         assertClose(solve(a11, b13), Numkt.ndarray(Numkt[Numkt[0.75, 1.0, 1.25]]), procedurePrecision)
 
         for (iteration in 0 until 1000) {
@@ -169,7 +171,8 @@ class KELinAlgTest {
         assertCloseComplex(solveC(c11, d11), Numkt.ndarray(Numkt[Numkt[ComplexDouble(1.04615384615384, 0.1692307692307692)]]), procedurePrecision)
         // d1 / c11
         assertCloseComplex(solveC(c11, d1), Numkt.ndarray(Numkt[ComplexDouble(1.27692307692307, 0.01538461538461533)]), procedurePrecision)
-        assertThrows(IllegalArgumentException::class.java) { solveC(c11, d3) }
+        assertFailsWith<IllegalArgumentException> { solveC(c11, d3) }
+
         // d13 / c11
         assertCloseComplex(solveC(c11, d13), Numkt.ndarray(Numkt[Numkt[ComplexDouble(0.9384615384615385, 0.1076923076923077), ComplexDouble(1.1076923076923078, 0.06153846153846152), ComplexDouble(2.676923076923077, 0.8153846153846155)]]), procedurePrecision)
 
@@ -210,7 +213,7 @@ class KELinAlgTest {
         assertCloseComplex(solveC(c11ComplexFloat, d1ComplexFloat1ComplexFloat), Numkt.ndarray(Numkt[Numkt[ComplexFloat(1.04615384615384, 0.1692307692307692)]]), procedurePrecision)
         // d1ComplexFloat / c11ComplexFloat
         assertCloseComplex(solveC(c11ComplexFloat, d1ComplexFloat), Numkt.ndarray(Numkt[ComplexFloat(1.27692307692307, 0.01538461538461533)]), procedurePrecision)
-        assertThrows(IllegalArgumentException::class.java) { solveC(c11ComplexFloat, d3ComplexFloat) }
+        assertFailsWith<IllegalArgumentException> { solveC(c11ComplexFloat, d3ComplexFloat) }
         // d1ComplexFloat3 / c11ComplexFloat
         assertCloseComplex(solveC(c11ComplexFloat, d1ComplexFloat3), Numkt.ndarray(Numkt[Numkt[ComplexFloat(0.9384615384615385, 0.1076923076923077), ComplexFloat(1.1076923076923078, 0.06153846153846152), ComplexFloat(2.676923076923077, 0.8153846153846155)]]), procedurePrecision)
 
@@ -429,7 +432,7 @@ class KELinAlgTest {
         testedEigenvals = testedEigenvals.sortedWith(compareBy({ it.re }, { it.im }))
 
         for (i in 0 until n) {
-            assertTrue("${trueEigavals[i]} =/= ${testedEigenvals[i]}", (trueEigavals[i] - testedEigenvals[i]).abs() < precision )
+            assertTrue("${trueEigavals[i]} =/= ${testedEigenvals[i]}") { (trueEigavals[i] - testedEigenvals[i]).abs() < precision }
         }
 
     }
@@ -437,7 +440,7 @@ class KELinAlgTest {
 
 
 private fun <T : Complex, D : Dim2> assertCloseComplex(a: MultiArray<T, D>, b: MultiArray<T, D>, precision: Double) {
-    assertEquals("matrices have different dimensions", a.dim.d, b.dim.d)
+    assertEquals(a.dim.d, b.dim.d)
     assertEquals(a.dtype, b.dtype)
 
     var maxabs = 0.0
@@ -450,6 +453,7 @@ private fun <T : Complex, D : Dim2> assertCloseComplex(a: MultiArray<T, D>, b: M
                     maxabs = max((a[i] - b[i]).abs(), maxabs)
                 }
             }
+
             DataType.ComplexFloatDataType -> {
                 a as D1Array<ComplexFloat>
                 b as D1Array<ComplexFloat>
@@ -457,10 +461,11 @@ private fun <T : Complex, D : Dim2> assertCloseComplex(a: MultiArray<T, D>, b: M
                     maxabs = max((a[i] - b[i]).abs().toDouble(), maxabs)
                 }
             }
+
             else -> throw UnsupportedOperationException()
 
         }
-        assertTrue("matrices not close", maxabs < precision)
+        assertTrue("matrices not close") { maxabs < precision }
         return
     }
     when (a.dtype) {
@@ -473,6 +478,7 @@ private fun <T : Complex, D : Dim2> assertCloseComplex(a: MultiArray<T, D>, b: M
                 }
             }
         }
+
         DataType.ComplexFloatDataType -> {
             a as D2Array<ComplexFloat>
             b as D2Array<ComplexFloat>
@@ -482,16 +488,17 @@ private fun <T : Complex, D : Dim2> assertCloseComplex(a: MultiArray<T, D>, b: M
                 }
             }
         }
+
         else -> throw UnsupportedOperationException()
 
     }
-    assertTrue("matrices not close", maxabs < precision)
+    assertTrue("matrices not close") { maxabs < precision }
     return
 }
 
 
 private fun <T : Number, D : Dim2> assertClose(a: MultiArray<T, D>, b: MultiArray<T, D>, precision: Double) {
-    assertEquals("matrices have different dimensions", a.dim.d, b.dim.d)
+    assertEquals(a.dim.d, b.dim.d)
     var maxabs = 0.0
     if (a.dim.d == 1) {
         a as D1Array<T>
@@ -508,7 +515,7 @@ private fun <T : Number, D : Dim2> assertClose(a: MultiArray<T, D>, b: MultiArra
             }
         }
     }
-    assertTrue("matrices not close", maxabs < precision)
+    assertTrue("matrices not close") { maxabs < precision }
 }
 
 private fun <T : Number> assertTriangular(a: MultiArray<T, D2>, isLowerTriangular: Boolean, requireUnitsOnDiagonal: Boolean) {

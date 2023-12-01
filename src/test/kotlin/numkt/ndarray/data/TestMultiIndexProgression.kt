@@ -2,9 +2,10 @@ package com.rarnu.numkt.test.numkt.ndarray.data
 
 import com.rarnu.numkt.ndarray.data.downTo
 import com.rarnu.numkt.ndarray.data.rangeTo
-import org.junit.Assert.*
-import org.junit.Test
-
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertSame
+import kotlin.test.assertTrue
 
 class TestMultiIndexProgression {
 

@@ -5,9 +5,8 @@ import com.rarnu.numkt.api.ndarray
 import com.rarnu.numkt.ndarray.data.get
 import com.rarnu.numkt.ndarray.data.rangeTo
 import com.rarnu.numkt.ndarray.operations.joinToString
-import org.junit.Assert.assertEquals
-import org.junit.Test
-
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class TestIndexingAndIterating {
     @Test
