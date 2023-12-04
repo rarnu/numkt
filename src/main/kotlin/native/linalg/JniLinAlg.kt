@@ -4,8 +4,7 @@ import com.rarnu.numkt.ndarray.complex.ComplexDouble
 import com.rarnu.numkt.ndarray.complex.ComplexFloat
 
 internal object JniLinAlg {
-    external fun pow(mat: FloatArray, n: Int, result: FloatArray)
-    external fun pow(mat: DoubleArray, n: Int, result: DoubleArray)
+
     external fun norm(norm: Char, m: Int, n: Int, mat: FloatArray, lda: Int): Float
     external fun norm(norm: Char, m: Int, n: Int, mat: DoubleArray, lda: Int): Double
 
@@ -34,10 +33,8 @@ internal object JniLinAlg {
     external fun svd(m: Int, n: Int, a: DoubleArray, lda: Int, s: DoubleArray, u: DoubleArray, ldu: Int, vt: DoubleArray, ldvt: Int): Int
     external fun svdC(m: Int, n: Int, a: FloatArray, lda: Int, s: FloatArray, u: FloatArray, ldu: Int, vt: FloatArray, ldvt: Int): Int
     external fun svdC(m: Int, n: Int, a: DoubleArray, lda: Int, s: DoubleArray, u: DoubleArray, ldu: Int, vt: DoubleArray, ldvt: Int): Int
-    @Suppress("UNUSED_PARAMETER")
-    fun eig(n: Int, a: FloatArray, w: FloatArray, computeV: Char, vr: FloatArray?): Int = TODO("implementation")
-    @Suppress("UNUSED_PARAMETER")
-    fun eig(n: Int, a: DoubleArray, w: DoubleArray, computeV: Char, vr: DoubleArray?): Int = TODO("implementation")
+    external fun eig(n: Int, a: FloatArray, w: FloatArray, computeV: Char, vr: FloatArray?): Int
+    external fun eig(n: Int, a: DoubleArray, w: DoubleArray, computeV: Char, vr: DoubleArray?): Int
 
     /**
      * @param n

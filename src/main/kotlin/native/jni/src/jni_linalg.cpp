@@ -5,25 +5,6 @@
 
 /*
  * Class:     com_rarnu_numkt_native_linalg_JniLinAlg
- * Method:    pow
- * Signature: ([FI[F)V
- */
-JNIEXPORT void JNICALL Java_com_rarnu_numkt_native_linalg_JniLinAlg_pow___3FI_3F(JNIEnv *env, jobject jobj, jfloatArray mat, jint n, jfloatArray result) {
-    // TODO(Optimize pow)
-}
-
-/*
- * Class:     com_rarnu_numkt_native_linalg_JniLinAlg
- * Method:    pow
- * Signature: ([DI[D)V
- */
-JNIEXPORT void JNICALL Java_com_rarnu_numkt_native_linalg_JniLinAlg_pow___3DI_3D(JNIEnv *env, jobject jobj, jdoubleArray mat, jint n, jdoubleArray result) {
-    // TODO(Optimize pow)
-}
-
-
-/*
- * Class:     com_rarnu_numkt_native_linalg_JniLinAlg
  * Method:    norm
  * Signature: (CII[FI)F
  */

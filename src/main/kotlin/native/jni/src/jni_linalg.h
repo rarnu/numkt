@@ -9,20 +9,6 @@ extern "C" {
 
 /*
  * Class:     com_rarnu_numkt_native_linalg_JniLinAlg
- * Method:    pow
- * Signature: ([FI[F)V
- */
-JNIEXPORT void JNICALL Java_com_rarnu_numkt_native_linalg_JniLinAlg_pow___3FI_3F(JNIEnv *, jobject, jfloatArray, jint, jfloatArray);
-
-/*
- * Class:     com_rarnu_numkt_native_linalg_JniLinAlg
- * Method:    pow
- * Signature: ([DI[D)V
- */
-JNIEXPORT void JNICALL Java_com_rarnu_numkt_native_linalg_JniLinAlg_pow___3DI_3D(JNIEnv *, jobject, jdoubleArray, jint, jdoubleArray);
-
-/*
- * Class:     com_rarnu_numkt_native_linalg_JniLinAlg
  * Method:    norm
  * Signature: (CII[FI)F
  */
@@ -149,6 +135,20 @@ JNIEXPORT jint JNICALL Java_com_rarnu_numkt_native_linalg_JniLinAlg_svdC__II_3DI
 
 /*
  * Class:     com_rarnu_numkt_native_linalg_JniLinAlg
+ * Method:    eig
+ * Signature: (I[F[FC[F)I
+ */
+JNIEXPORT jint JNICALL Java_com_rarnu_numkt_native_linalg_JniLinAlg_eig__I_3F_3FC_3F(JNIEnv *env, jobject jobj, jint n, jfloatArray j_a, jfloatArray j_w, jchar compute_v, jfloatArray j_v);
+
+/*
+ * Class:     com_rarnu_numkt_native_linalg_JniLinAlg
+ * Method:    eig
+ * Signature: (I[D[DC[D)I
+ */
+JNIEXPORT jint JNICALL Java_com_rarnu_numkt_native_linalg_JniLinAlg_eig__I_3D_3DC_3D(JNIEnv *env, jobject jobj, jint n, jdoubleArray j_a, jdoubleArray j_w, jchar compute_v, jdoubleArray j_v);
+
+/*
+ * Class:     com_rarnu_numkt_native_linalg_JniLinAlg
  * Method:    solve
  * Signature: (II[FI[FI)I
  */
@@ -258,7 +258,6 @@ JNIEXPORT jobject JNICALL Java_com_rarnu_numkt_native_linalg_JniLinAlg_dotVVCF(J
  * Signature: (II[DII[DI)Lcom/rarnu/numkt/ndarray/complex/ComplexDouble;
  */
 JNIEXPORT jobject JNICALL Java_com_rarnu_numkt_native_linalg_JniLinAlg_dotVVC(JNIEnv *, jobject, jint, jint, jdoubleArray, jint, jint, jdoubleArray, jint);
-
 
 #ifdef __cplusplus
 }

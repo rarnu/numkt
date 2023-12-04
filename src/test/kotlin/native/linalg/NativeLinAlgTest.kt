@@ -199,7 +199,6 @@ class NativeLinAlgTest {
         assertComplexFloatingNDArray(Numkt.identity(83), NativeLinAlg.dot(a, ainv))
     }
 
-    @Ignore// fix for linux
     @Test
     fun computeEigenvalues() {
         val a = Numkt.ndarray(Numkt[Numkt[1.0, .0], Numkt[.0, 1.0]])

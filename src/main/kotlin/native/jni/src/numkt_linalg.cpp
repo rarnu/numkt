@@ -96,7 +96,7 @@ int qr_matrix_complex_double(int m, int n, double *AQ, int lda, double *R) {
 }
 
 int plu_matrix_float(int m, int n, float *A, int lda, int *IPIV) {
-    int num_threads = openblas_get_num_threads(); // TODO (fast fix for single threaded mode. Remove, wrap set in kotlin)
+    int num_threads = openblas_get_num_threads();
     openblas_set_num_threads(1);
     int info = LAPACKE_sgetrf(LAPACK_ROW_MAJOR, m, n, A, lda, IPIV);
     openblas_set_num_threads(num_threads);

@@ -786,7 +786,7 @@ JNIEXPORT jboolean JNICALL Java_com_rarnu_numkt_native_math_JniMath_cumSum___3BI
     auto arr = (int8_t *) env->GetPrimitiveArrayCritical((jarray) jarr, nullptr);
     auto out = (int8_t *) env->GetPrimitiveArrayCritical((jarray) jout, nullptr);
 
-    array_cumsum(arr, out, offset, size, dim, shape, strides, type); // TODO(change signature?)
+    array_cumsum(arr, out, offset, size, dim, shape, strides, type);
 
     if (strides != nullptr) {
         env->ReleasePrimitiveArrayCritical(jstrides, strides, 0);

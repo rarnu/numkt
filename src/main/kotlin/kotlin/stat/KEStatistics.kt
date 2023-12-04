@@ -1,3 +1,5 @@
+@file:Suppress("DuplicatedCode")
+
 package com.rarnu.numkt.kotlin.stat
 
 import com.rarnu.numkt.api.stat.Statistics

@@ -1,4 +1,4 @@
-@file:Suppress("DuplicatedCode", "UNCHECKED_CAST")
+@file:Suppress("DuplicatedCode", "UNCHECKED_CAST", "IMPLICIT_CAST_TO_ANY")
 
 package com.rarnu.numkt.kotlin.math
 
@@ -6,6 +6,8 @@ import com.rarnu.numkt.api.Numkt
 import com.rarnu.numkt.api.math.Math
 import com.rarnu.numkt.api.math.MathEx
 import com.rarnu.numkt.api.zeros
+import com.rarnu.numkt.ndarray.complex.ComplexDouble
+import com.rarnu.numkt.ndarray.complex.ComplexFloat
 import com.rarnu.numkt.ndarray.data.*
 import com.rarnu.numkt.ndarray.operations.first
 import com.rarnu.numkt.ndarray.operations.plusAssign
@@ -322,6 +324,20 @@ private fun <T : Number, D : Dimension> summation(a: MultiArray<T, D>): T = when
         }
         accum
     }
-
-    else -> TODO("Complex numbers")
+    DataType.ComplexFloatDataType -> {
+        var accum = ComplexFloat(0f,0f)
+        val iter = if (a.consistent) a.data.getComplexFloatArray().iterator() else (a as MultiArray<ComplexFloat, *>).iterator()
+        for (el in iter) {
+            accum += el
+        }
+        accum
+    }
+    DataType.ComplexDoubleDataType -> {
+        var accum = ComplexDouble(0.0,0.0)
+        val iter = if (a.consistent) a.data.getComplexDoubleArray().iterator() else (a as MultiArray<ComplexDouble, *>).iterator()
+        for (el in iter) {
+            accum += el
+        }
+        accum
+    }
 } as T

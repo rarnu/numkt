@@ -75,27 +75,27 @@ internal object KELinAlgEx : LinAlgEx {
     override fun <T : Complex> pluC(mat: MultiArray<T, D2>): Triple<D2Array<T>, D2Array<T>, D2Array<T>> = pluCommon(mat, mat.dtype)
 
     override fun svdF(mat: MultiArray<Float, D2>): Triple<D2Array<Float>, D1Array<Float>, D2Array<Float>> {
-        TODO("Not yet implemented")
+        throw RuntimeException("svdF is implemented in Native Engine")
     }
 
     override fun <T : Number> svd(mat: MultiArray<T, D2>): Triple<D2Array<Double>, D1Array<Double>, D2Array<Double>> {
-        TODO("Not yet implemented")
+        throw RuntimeException("svd is implemented in Native Engine")
     }
 
     override fun <T : Complex> svdC(mat: MultiArray<T, D2>): Triple<D2Array<T>, D1Array<T>, D2Array<T>> {
-        TODO("Not yet implemented")
+        throw RuntimeException("svdC is implemented in Native Engine")
     }
 
     override fun <T : Number> eig(mat: MultiArray<T, D2>): Pair<D1Array<ComplexDouble>, D2Array<ComplexDouble>> {
-        TODO("Not yet implemented")
+        throw RuntimeException("eig is implemented in Native Engine")
     }
 
     override fun eigF(mat: MultiArray<Float, D2>): Pair<D1Array<ComplexFloat>, D2Array<ComplexFloat>> {
-        TODO("Not yet implemented")
+        throw RuntimeException("eigF is implemented in Native Engine")
     }
 
     override fun <T : Complex> eigC(mat: MultiArray<T, D2>): Pair<D1Array<T>, D2Array<T>> {
-        TODO("Not yet implemented")
+        throw RuntimeException("eigC is implemented in Native Engine")
     }
 
     override fun <T : Number> eigVals(mat: MultiArray<T, D2>): D1Array<ComplexDouble> = eigenValuesCommon(mat, DataType.ComplexDoubleDataType)
